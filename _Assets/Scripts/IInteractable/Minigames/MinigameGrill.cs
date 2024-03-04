@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class MinigameGrill : MinigameBase
+public class MinigameGrill : MinigameBase // change this to minigame_wait for modularity
 {
     [SerializeField] private int heatPower = 4;
     private int heatRequired = 0;
@@ -9,9 +9,8 @@ public class MinigameGrill : MinigameBase
 
     public override void StartMinigame()
     {
-        IHoldable item = ((IsItemPreparer)caller).ContainedItem;
-
-        if (item.prepareResult == null) // todo make it use inventory system instead
+        IHoldable item = (caller as IInventory).Inventory[0];
+        if (item.prepareResult == null)
             return;
 
         heatRequired = item.ChopsOrHeatsRequired;

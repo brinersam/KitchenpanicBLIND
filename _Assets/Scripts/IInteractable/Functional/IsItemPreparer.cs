@@ -2,75 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [RequireComponent(typeof(IsInteractable))]
-//[RequireComponent(typeof(IsItemGiver))]
-
-public class IsItemPreparer : MonoBehaviour, IInteractable, IMinigameSubscriber
+[RequireComponent(typeof(Inventory))]
+public class IsItemPreparer : MonoBehaviour, IInteractable, IMinigameSubscriber, IInventory
 {
-    // [SerializeField] // really all inventory functions should go through an interface todo
-    // private IInventory inventory;
-    
     [SerializeField] private PreparationEnum preparerType;
-    [SerializeField] private ItemDisplayer displayer;
     [SerializeField] private MinigameBase minigame;
+    [SerializeField] private Inventory inventory;
+    public Inventory Inventory => inventory;
 
-    private IHoldable containedItem;
-    public IHoldable ContainedItem
-    {
-        get { return containedItem; }
-        private set
-        {
-            containedItem = value;
-            displayer.UpdateVisuals(containedItem);
-        }
-    }
-
-    private void Awake()
+    void Awake()
     {
         minigame.Initialize(this);
     }
 
-    public void Interact(PlayerCursor caller, bool alt)
+    public void Interact(MonoBehaviour caller, bool alt)
     {
         if (IsMinigameInProgress()) // redirect control to minigame
         {
             minigame.Interact(alt);
             return;
         }
-        
-        if ((ContainedItem == null) == (caller.Inventory == null)) return; // xnor we cant have both (empty hands and empty grill) and (busy hands and busy grill)
-        
-        if (caller.Inventory == null)
+
+        Inventory callerInv = (caller as IInventory).Inventory;
+
+        if (inventory.IsEmpty)
         {
-            caller.ReceiveItem(ContainedItem);
-            ContainedItem = null;
+            if (callerInv[0].prepareMethod != preparerType) return;
+
+            inventory.TryReceiveItem(callerInv);
+            TryStartMinigame();
+        }
+        else
+        {
+            callerInv.TryReceiveItem(inventory);
+            return;
+        }
+    }
+
+    public void OnMinigameFinished()
+    {
+        if (inventory.IsEmpty || !inventory[0].TryPrepare(out IHoldable result)) return;
+        inventory[0] = result;
+    }
+
+    private void TryStartMinigame()
+    {
+        if (minigame == null)  // no minigame = prepare ingredient instantly
+        {
+            OnMinigameFinished();
             return;
         }
 
-        if (ContainedItem == null)
-        {
-            if (caller.Inventory.prepareMethod != preparerType) return;
-
-            ContainedItem = caller.LoseItem();
-
-            if (minigame == null)
-            {
-                OnMinigameFinished();
-                return;
-            }
-
-            minigame.StartMinigame();
-            return;
-        }
+        minigame.StartMinigame();
     }
     private bool IsMinigameInProgress()
     {
         return minigame != null && minigame.CurState != MinigameBase.MinigameStateEnum.Offline;
-    }
-    public void OnMinigameFinished()
-    {
-        if (ContainedItem == null || !ContainedItem.TryPrepare(out IHoldable result)) return;
-        ContainedItem = result;
     }
 }

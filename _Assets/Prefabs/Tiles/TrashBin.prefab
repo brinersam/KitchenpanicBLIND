@@ -105,7 +105,7 @@ PrefabInstance:
       addedObject: {fileID: 2234324285258134921}
     - targetCorrespondingSourceObject: {fileID: 8062420682854627632, guid: 78a3f40743836214caf0453da848330a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4295327314768443805}
+      addedObject: {fileID: 8798500038142499620}
   m_SourcePrefab: {fileID: 100100000, guid: 78a3f40743836214caf0453da848330a, type: 3}
 --- !u!1 &599967150975073331 stripped
 GameObject:
@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshToHighlight: {fileID: 3672070754111418274}
-  IInteractableScript: {fileID: 4295327314768443805}
---- !u!114 &4295327314768443805
+  IInteractableScript: {fileID: 8798500038142499620}
+--- !u!114 &8798500038142499620
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,11 +135,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 599967150975073331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b298dea23f103554cb45d4557443bd82, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c3c5faf355856246b17a4f4874f101c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToGive: {fileID: 11400000, guid: 554c65d51a8291144898799084d0010a, type: 2}
-  applyIconTo: {fileID: 0}
 --- !u!23 &3672070754111418274 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6144364477591792289, guid: 78a3f40743836214caf0453da848330a, type: 3}

@@ -21,8 +21,10 @@ public class IsItemGiver : MonoBehaviour, IInteractable
         if (applyIconTo != null)
             applyIconTo.sprite = itemToGive.icon;
     }
-    public void Interact(PlayerCursor caller, bool alt)
+    public void Interact(MonoBehaviour caller, bool alt)
     {
-        caller.ReceiveItem(Instantiate(itemToGive));
+        Inventory callerInv = (caller as IInventory).Inventory;
+
+        callerInv.TryReceiveItem(Instantiate(itemToGive));
     }
 }

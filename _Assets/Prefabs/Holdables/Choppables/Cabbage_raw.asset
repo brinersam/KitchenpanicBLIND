@@ -17,3 +17,4 @@ MonoBehaviour:
   type: 6
   prepareMethod: 2
   prepareResult: {fileID: 11400000, guid: 9b23560aa35a2234b89b4f34707b1b7f, type: 2}
+  ChopsOrHeatsRequired: 8

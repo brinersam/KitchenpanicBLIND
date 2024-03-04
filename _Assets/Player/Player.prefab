@@ -451,6 +451,7 @@ GameObject:
   - component: {fileID: 8143744671610112616}
   - component: {fileID: 2154180606896478335}
   - component: {fileID: 8678164555022215659}
+  - component: {fileID: 8606323901211617285}
   - component: {fileID: 40665738394670440}
   m_Layer: 0
   m_Name: Player
@@ -586,6 +587,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDisplayer: {fileID: 40665738394670440}
   plCntrl: {fileID: 2154180606896478335}
+  inventory: {fileID: 8606323901211617285}
+--- !u!114 &8606323901211617285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548076756939828666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa784d4544cddd40a78c6cb9d8a152e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots:
+  - {fileID: 0}
+  hasWhiteList: 0
+  item_WhiteList: 
+  displayer: {fileID: 40665738394670440}
 --- !u!114 &40665738394670440
 MonoBehaviour:
   m_ObjectHideFlags: 0

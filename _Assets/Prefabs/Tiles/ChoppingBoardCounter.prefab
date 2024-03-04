@@ -167,6 +167,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8062420682854627632, guid: 78a3f40743836214caf0453da848330a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1626719233644006601}
+    - targetCorrespondingSourceObject: {fileID: 8062420682854627632, guid: 78a3f40743836214caf0453da848330a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8829974422794426057}
   m_SourcePrefab: {fileID: 100100000, guid: 78a3f40743836214caf0453da848330a, type: 3}
 --- !u!4 &3300286014347868988 stripped
 Transform:
@@ -215,8 +218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preparerType: 2
-  displayer: {fileID: 6910029147652800201}
   minigame: {fileID: 1626719233644006601}
+  inventory: {fileID: 8829974422794426057}
 --- !u!114 &6910029147652800201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +247,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 4911424544486386145}
   chopPower: 1
+--- !u!114 &8829974422794426057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7132365856487276621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa784d4544cddd40a78c6cb9d8a152e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots:
+  - {fileID: 0}
+  hasWhiteList: 0
+  item_WhiteList: 
+  displayer: {fileID: 6910029147652800201}
 --- !u!1001 &1719895832172309564
 PrefabInstance:
   m_ObjectHideFlags: 0

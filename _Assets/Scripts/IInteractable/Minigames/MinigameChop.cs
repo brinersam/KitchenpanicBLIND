@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinigameChop : MinigameBase
+public class MinigameChop : MinigameBase // change this to minigame_clicker for modularity
 {
     [SerializeField] private int chopPower = 4;
     private int chopsRequired = 0;
@@ -10,8 +10,8 @@ public class MinigameChop : MinigameBase
 
     public override void StartMinigame()
     {
-        IHoldable item = ((IsItemPreparer)caller).ContainedItem;
-        if (item.prepareResult == null) // todo make it use inventory system instead
+        IHoldable item = (caller as IInventory).Inventory[0];
+        if (item.prepareResult == null)
             return;
         
         chopsRequired = item.ChopsOrHeatsRequired;

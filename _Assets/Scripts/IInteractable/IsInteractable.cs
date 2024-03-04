@@ -29,7 +29,7 @@ public class IsInteractable : MonoBehaviour, IInteractable
         meshToHighlight.SetPropertyBlock(MPB);
     }
 
-    public void Interact(PlayerCursor caller, bool alt)
+    public void Interact(MonoBehaviour caller, bool alt)
     {
         InteractScript.Interact(caller, alt);
     }

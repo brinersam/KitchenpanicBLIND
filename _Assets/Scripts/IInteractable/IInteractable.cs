@@ -1,5 +1,5 @@
 using UnityEngine;
 public interface IInteractable
 {
-    void Interact(PlayerCursor caller, bool alt);
+    void Interact(MonoBehaviour caller, bool alt);
 }
