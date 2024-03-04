@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1618630aa95621446b382dcc399b0955, type: 3}
+  m_Name: Cabbage_chopped
+  m_EditorClassIdentifier: 
+  visualObj: {fileID: 4973929360063704120, guid: e95c688f005cdb14dae104614cfd8d68, type: 3}
+  icon: {fileID: 21300000, guid: bee24f07c57157e45a946eed3bfe8b84, type: 3}
+  type: 1
+  prepareMethod: 0
+  prepareResult: {fileID: 0}
