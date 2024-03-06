@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnAltInteract(InputValue input)
     {
-        cursor.Interact(true);
+        cursor.Interact(alt : true);
     }
 
 }

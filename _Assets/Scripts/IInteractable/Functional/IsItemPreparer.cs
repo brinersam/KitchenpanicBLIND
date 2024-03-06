@@ -26,23 +26,21 @@ public class IsItemPreparer : MonoBehaviour, IInteractable, IMinigameSubscriber,
 
         Inventory callerInv = (caller as IInventory).Inventory;
 
-        if (inventory.IsEmpty)
+        if (!inventory.IsFull)
         {
-            if (callerInv[0].prepareMethod != preparerType) return;
+            if (!callerInv.IsFull || callerInv[0].prepareMethod != preparerType) return;
 
-            inventory.TryReceiveItem(callerInv);
+            inventory.InteractWInv(callerInv);
             TryStartMinigame();
-        }
-        else
-        {
-            callerInv.TryReceiveItem(inventory);
             return;
         }
+        
+        inventory.InteractWInv(callerInv);
     }
 
     public void OnMinigameFinished()
     {
-        if (inventory.IsEmpty || !inventory[0].TryPrepare(out IHoldable result)) return;
+        if (!inventory.IsFull || !inventory[0].TryPrepare(out IHoldable result)) return;
         inventory[0] = result;
     }
 
@@ -53,9 +51,9 @@ public class IsItemPreparer : MonoBehaviour, IInteractable, IMinigameSubscriber,
             OnMinigameFinished();
             return;
         }
-
         minigame.StartMinigame();
     }
+    
     private bool IsMinigameInProgress()
     {
         return minigame != null && minigame.CurState != MinigameBase.MinigameStateEnum.Offline;
