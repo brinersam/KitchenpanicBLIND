@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Holdables", menuName = "Holdables/HoldableBase" )]
-public class IHoldable : ScriptableObject
+public class Holdable : ScriptableObject
 {
     public GameObject visualObj;
     public Sprite icon;
@@ -11,9 +11,9 @@ public class IHoldable : ScriptableObject
 
 /// This line below should be implemented using composition but i cant link it on Start() or through editor (cant access fields of or insert a monobehaviour)
     public PreparationEnum prepareMethod;
-    public IHoldable prepareResult;
+    public Holdable prepareResult;
     public int ChopsOrHeatsRequired = 6;
-    public bool TryPrepare(out IHoldable result)
+    public bool TryPrepare(out Holdable result)
     {
         if (prepareMethod == PreparationEnum.None)
         {

@@ -6,7 +6,7 @@ using UnityEngine;
 public class IsItemGiver : MonoBehaviour, IInteractable
 {
     [SerializeField]
-    IHoldable itemToGive;
+    Holdable itemToGive;
     [SerializeField]
     SpriteRenderer applyIconTo;
 
@@ -25,6 +25,6 @@ public class IsItemGiver : MonoBehaviour, IInteractable
     {
         Inventory callerInv = (caller as IInventory).Inventory;
 
-        callerInv.TryReceiveItem(Instantiate(itemToGive));
+        callerInv.Item_TryReceive(Instantiate(itemToGive));
     }
 }

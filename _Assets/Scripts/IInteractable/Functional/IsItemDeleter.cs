@@ -8,6 +8,6 @@ public class IsItemDisposer : MonoBehaviour, IInteractable
     public void Interact(MonoBehaviour caller, bool alt)
     {
         Inventory callerInv = (caller as IInventory).Inventory;
-        callerInv.LoseItem();
+        callerInv.Item_Lose();
     }
 }

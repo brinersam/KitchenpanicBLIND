@@ -2,83 +2,92 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ItemDisplayer))]
 public class Inventory : MonoBehaviour
 {   
-    [SerializeField] private IHoldable[] slots = new IHoldable[1]; // use stack instead or smth
-    [SerializeField] private bool hasWhiteList = false;
-    [SerializeField] private ItemType[] item_WhiteList;
-    [SerializeField] private ItemDisplayer displayer;
-    readonly HashSet<ItemType> _itemWhiteList;
-    public bool IsFull {get {return slots.FirstOrDefault(x => x != null) == null;}} // todo
+    [SerializeField] private int invSlots = 1;
+    private LimitedSizeStack<Holdable> dataStack;
 
-    public IHoldable this[int idx]
-    {
-        get { return slots[idx]; }
-        set {
-                slots[idx] = value;
-                displayer.UpdateVisuals(this[idx]);
-            }
-    }
-    
+    [SerializeField] private bool hasWhiteList = false;
+    [SerializeField] private ItemType[] item_WhiteList; // needs to be generic or bunsh of arrays with each having their own type
+    [SerializeField] private HasItemDisplayer displayer;
+    readonly HashSet<ItemType> _itemWhiteList;
+    public bool IsFull => dataStack.IsFull;
+    public bool IsEmpty => dataStack.IsEmpty;
+
     void Awake()
     {
+        dataStack = new(invSlots);
+
         foreach(var i in item_WhiteList)    
             _itemWhiteList.Add(i);
         
-        foreach(var i in slots)
-            if (i != null)
-                displayer.UpdateVisuals(i);
+        //foreach(var i in dataStack)
+        displayer.UpdateVisuals(dataStack);
     }
 
-    public void InteractWInv(Inventory giverInventory, int idx = 0)
+    public void Pull_PushItem(Inventory giverInventory) //honestly just split it into push and pull man this sucks todo
     {
-        if (giverInventory.IsFull == IsFull)
+        if (giverInventory.IsFull == this.IsFull) // bug todo if shelf has more than 1 slot and u put a thing in it, we fall into collision for some reason instead of interaction
         {
-            if (IsFull) return;
+            if (IsEmpty) return;
 
-            Debug.LogError($"Inventories collided", gameObject);
-        }
-
-        else if (this.IsFull)
-        {
-            giverInventory.TryReceiveItem(this, idx);
-        }
-
-        else if (giverInventory.IsFull)
-        {
-            this.TryReceiveItem(giverInventory, idx);
-        }
-    }
-
-    public void TryReceiveItem(IHoldable item, int idx = 0)
-    {
-        if (IsFull) {return;}
-
-        if (PassesWhitelist(item))
-            this[idx] = item;
-    }
-
-    public void TryReceiveItem(Inventory callerInv, int idx = 0)
-    {
-        if (IsFull)
-        {
-            Debug.LogError($"Attempt at receiving an item while inventory is full! This shouldn't happen.", gameObject);
+            Debug.Log($"Inventories collided between {gameObject.name} && {giverInventory.gameObject.name}", gameObject);
             return;
         }
-        
-        if (PassesWhitelist(callerInv[idx]))
-            this[idx] = callerInv.LoseItem(idx);
+
+        if (giverInventory.IsFull)
+        {
+            this.Item_TryReceive(giverInventory);
+            return;
+        }
+
+        if (this.IsFull)
+        {
+            giverInventory.Item_TryReceive(this);
+            return;
+        }
     }
 
-    public IHoldable LoseItem(int idx = 0)
+    public void Item_Replace(Holdable item)
     {
-        IHoldable temp = this[idx];
-        this[idx] = null;
+        dataStack.Pop();
+        dataStack.TryPush(item);
+        //displayer.UpdateVisuals(dataStack.Peek());
+        displayer.UpdateVisuals(dataStack);
+    }
+
+
+    public void Item_TryReceive(Inventory giverInv)
+    {
+        if (this.Item_TryReceive(giverInv.Item_Peek()))
+            giverInv.Item_Lose();
+    }
+
+    public bool Item_TryReceive(Holdable item)
+    {
+        if (!PassesWhitelist(item)) return false;
+
+        bool success = dataStack.TryPush(item);
+        //displayer.UpdateVisuals(dataStack.Peek());
+        displayer.UpdateVisuals(dataStack);
+
+        return success;
+    }
+
+    public Holdable Item_Lose()
+    {
+        Holdable temp = dataStack.Pop();
+        //displayer.UpdateVisuals(dataStack.Peek());
+        displayer.UpdateVisuals(dataStack);
         return temp;
     }
+    
+    public Holdable Item_Peek()
+    {
+        return dataStack.Peek();
+    }
 
-    private bool PassesWhitelist(IHoldable item)
+    private bool PassesWhitelist(Holdable item)
     {
         if (!hasWhiteList) return true;
 

@@ -8,7 +8,7 @@ public class PlayerCursor : MonoBehaviour, IInventory
 {
     public IInteractable cursorSelection = null;
     
-    [SerializeField] private ItemDisplayer itemDisplayer;
+    [SerializeField] private HasItemDisplayer itemDisplayer;
     [SerializeField] private PlayerController plCntrl;
     [SerializeField] private Inventory inventory;
     public Inventory Inventory { get => inventory; }

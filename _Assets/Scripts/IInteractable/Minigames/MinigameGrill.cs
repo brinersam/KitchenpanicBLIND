@@ -9,7 +9,7 @@ public class MinigameGrill : MinigameBase // change this to minigame_wait for mo
 
     public override void StartMinigame()
     {
-        IHoldable item = (caller as IInventory).Inventory[0];
+        Holdable item = (caller as IInventory).Inventory.Item_Peek();
         if (item.prepareResult == null)
             return;
 

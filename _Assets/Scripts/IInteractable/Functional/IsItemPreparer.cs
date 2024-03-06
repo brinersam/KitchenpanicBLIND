@@ -26,32 +26,22 @@ public class IsItemPreparer : MonoBehaviour, IInteractable, IMinigameSubscriber,
 
         Inventory callerInv = (caller as IInventory).Inventory;
 
-        if (!inventory.IsFull)
+        if (!inventory.IsFull) 
         {
-            if (!callerInv.IsFull || callerInv[0].prepareMethod != preparerType) return;
+            if (callerInv.Item_Peek() != null && callerInv.Item_Peek().prepareMethod != preparerType) return; // this is ass, make generic whitelist instead todo
 
-            inventory.InteractWInv(callerInv);
-            TryStartMinigame();
+            inventory.Item_TryReceive(callerInv);
+            minigame.StartMinigame();
             return;
         }
         
-        inventory.InteractWInv(callerInv);
+        inventory.Pull_PushItem(callerInv);
     }
 
     public void OnMinigameFinished()
     {
-        if (!inventory.IsFull || !inventory[0].TryPrepare(out IHoldable result)) return;
-        inventory[0] = result;
-    }
-
-    private void TryStartMinigame()
-    {
-        if (minigame == null)  // no minigame = prepare ingredient instantly
-        {
-            OnMinigameFinished();
-            return;
-        }
-        minigame.StartMinigame();
+        if (!inventory.IsFull || !inventory.Item_Peek().TryPrepare(out Holdable result)) return;
+        inventory.Item_Replace(result);
     }
     
     private bool IsMinigameInProgress()

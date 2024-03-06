@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Inventory))]
 [RequireComponent(typeof(IsInteractable))]
-public class ItemContainer : MonoBehaviour, IInteractable, IInventory
+public class IsItemContainer : MonoBehaviour, IInteractable, IInventory
 {
     [SerializeField] private Inventory inventory;
     public Inventory Inventory => inventory;
@@ -13,6 +13,6 @@ public class ItemContainer : MonoBehaviour, IInteractable, IInventory
     {
         Inventory callerInv = (caller as IInventory).Inventory;
 
-        inventory.InteractWInv(callerInv);
+        inventory.Pull_PushItem(callerInv);
     }
 }
