@@ -16,48 +16,47 @@ public class Inventory : MonoBehaviour
 
     void Awake()
     {
+        if (invSlots == 0) invSlots++; // remove when unity decides to stop being silly todo
+
         dataStack = new(invSlots);
 
         foreach(var i in item_WhiteList)    
             _itemWhiteList.Add(i);
         
-        //foreach(var i in dataStack)
         displayer.UpdateVisuals(dataStack);
     }
 
-    public void Pull_PushItem(Inventory giverInventory) //honestly just split it into push and pull man this sucks todo
+    public void Pull_PushItemFrom(Inventory giverInventory)
     {
-        if (giverInventory.IsFull == this.IsFull) // bug todo if shelf has more than 1 slot and u put a thing in it, we fall into collision for some reason instead of interaction
-        {
-            if (IsEmpty) return;
+        // Debug.Log("Entering pushpull"); // war is hell
+        // Holdable topmostItem = giverInventory.Item_Peek();
+        // if (topmostItem != null && topmostItem.type == ItemType.Container)
+        // {   
+        //     if (topmostItem.inventory == null)
+        //         topmostItem.GiveInventory(10);
 
-            Debug.Log($"Inventories collided between {gameObject.name} && {giverInventory.gameObject.name}", gameObject);
+        //     giverInventory = topmostItem.inventory;
+        //     Debug.Log("topmost is a plate!");
+        // }
+        
+        if (!giverInventory.IsEmpty) // null exception if plate
+        {
+            this.Item_TryReceiveFrom(giverInventory);
             return;
         }
 
-        if (giverInventory.IsFull)
-        {
-            this.Item_TryReceive(giverInventory);
-            return;
-        }
-
-        if (this.IsFull)
-        {
-            giverInventory.Item_TryReceive(this);
-            return;
-        }
+        giverInventory.Item_TryReceiveFrom(this);
     }
 
     public void Item_Replace(Holdable item)
     {
         dataStack.Pop();
         dataStack.TryPush(item);
-        //displayer.UpdateVisuals(dataStack.Peek());
         displayer.UpdateVisuals(dataStack);
     }
 
 
-    public void Item_TryReceive(Inventory giverInv)
+    public void Item_TryReceiveFrom(Inventory giverInv)
     {
         if (this.Item_TryReceive(giverInv.Item_Peek()))
             giverInv.Item_Lose();
@@ -65,11 +64,12 @@ public class Inventory : MonoBehaviour
 
     public bool Item_TryReceive(Holdable item)
     {
-        if (!PassesWhitelist(item)) return false;
+        if (item == null || !PassesWhitelist(item)) return false;
 
         bool success = dataStack.TryPush(item);
-        //displayer.UpdateVisuals(dataStack.Peek());
         displayer.UpdateVisuals(dataStack);
+
+        if (success) Debug.Log($"Receoved item: {item.name}");
 
         return success;
     }
@@ -77,7 +77,6 @@ public class Inventory : MonoBehaviour
     public Holdable Item_Lose()
     {
         Holdable temp = dataStack.Pop();
-        //displayer.UpdateVisuals(dataStack.Peek());
         displayer.UpdateVisuals(dataStack);
         return temp;
     }

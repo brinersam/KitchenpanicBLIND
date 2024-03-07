@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
 using System;
-using System.Linq;
 
 [Serializable] // todo make custom editor so i can see whats going on in here
 public class LimitedSizeStack<T> : IEnumerable<T>
@@ -9,8 +8,8 @@ public class LimitedSizeStack<T> : IEnumerable<T>
     readonly T[] data;
     readonly int maxSize;
     private int curSize;
-    public bool IsFull => curSize == maxSize;// data.All(x => x != null);
-    public bool IsEmpty => !data.Any(x => x != null);
+    public bool IsFull => !IsEmpty && (curSize == maxSize);// data.All(x => x != null);
+    public bool IsEmpty => curSize == 0;//!data.Any(x => x != null);
     public int Count => curSize;//data.Count(x => x != null);
     public int MaxSize => maxSize;
     

@@ -10,7 +10,7 @@ public class IsItemGiver : MonoBehaviour, IInteractable
     [SerializeField]
     SpriteRenderer applyIconTo;
 
-    private void Start()
+    private void Awake()
     {
         if (itemToGive == null)
         {
@@ -25,6 +25,6 @@ public class IsItemGiver : MonoBehaviour, IInteractable
     {
         Inventory callerInv = (caller as IInventory).Inventory;
 
-        callerInv.Item_TryReceive(Instantiate(itemToGive));
+        callerInv.Item_TryReceive(itemToGive);//Instantiate(itemToGive)); //todo do not instantiate SO
     }
 }
