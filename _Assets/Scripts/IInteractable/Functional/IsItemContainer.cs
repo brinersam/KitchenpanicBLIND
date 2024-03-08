@@ -13,6 +13,11 @@ public class IsItemContainer : MonoBehaviour, IInteractable, IInventory
     {
         Inventory callerInv = (caller as IInventory).Inventory;
 
+        if (alt)
+        {
+            this.inventory.Item_TryReceiveFrom(callerInv);
+            return;
+        }
         inventory.Pull_PushItemFrom(callerInv);
     }
 }

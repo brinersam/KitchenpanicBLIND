@@ -1,23 +1,30 @@
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Inventory : MonoBehaviour
 {   
     [SerializeField] private int invSlots = 1;
-    private LimitedSizeStack<Holdable> dataStack;
+    private LimitedSizeStack<Item> dataStack;
 
     [SerializeField] private bool hasWhiteList = false;
     [SerializeField] private ItemType[] item_WhiteList; // needs to be generic or bunsh of arrays with each having their own type
-    [SerializeField] private HasItemDisplayer displayer;
+    [SerializeField] public HasItemDisplayer displayer;
     readonly HashSet<ItemType> _itemWhiteList;
     public bool IsFull => dataStack.IsFull;
     public bool IsEmpty => dataStack.IsEmpty;
 
+    public Inventory (int invCapacity)
+    {
+        if (invCapacity <= 0)
+            throw new Exception("Attempt at initializing inventory of 0 slots!");
+
+        invSlots = invCapacity;
+        dataStack = new(invSlots);
+    }
+
     void Awake()
     {
-        if (invSlots == 0) invSlots++; // remove when unity decides to stop being silly todo
-
         dataStack = new(invSlots);
 
         foreach(var i in item_WhiteList)    
@@ -28,18 +35,15 @@ public class Inventory : MonoBehaviour
 
     public void Pull_PushItemFrom(Inventory giverInventory)
     {
-        // Debug.Log("Entering pushpull"); // war is hell
-        // Holdable topmostItem = giverInventory.Item_Peek();
-        // if (topmostItem != null && topmostItem.type == ItemType.Container)
-        // {   
-        //     if (topmostItem.inventory == null)
-        //         topmostItem.GiveInventory(10);
-
-        //     giverInventory = topmostItem.inventory;
-        //     Debug.Log("topmost is a plate!");
-        // }
+        Item topmostItem = giverInventory.Item_Peek();
+        if (topmostItem != null && topmostItem.Info.type == ItemType.Container) // i give up, this is too spaghetti i should follow the course for this one, hopefully i dont have to scrap too much code
+        {   
+            // giverInventory = topmostItem.Inventory;
+            // giverInventory.displayer = this.displayer;
+            // return;
+        }
         
-        if (!giverInventory.IsEmpty) // null exception if plate
+        if (!giverInventory.IsEmpty)
         {
             this.Item_TryReceiveFrom(giverInventory);
             return;
@@ -48,13 +52,12 @@ public class Inventory : MonoBehaviour
         giverInventory.Item_TryReceiveFrom(this);
     }
 
-    public void Item_Replace(Holdable item)
+    public void Item_Replace(Item item)
     {
         dataStack.Pop();
         dataStack.TryPush(item);
         displayer.UpdateVisuals(dataStack);
     }
-
 
     public void Item_TryReceiveFrom(Inventory giverInv)
     {
@@ -62,34 +65,31 @@ public class Inventory : MonoBehaviour
             giverInv.Item_Lose();
     }
 
-    public bool Item_TryReceive(Holdable item)
+    public bool Item_TryReceive(Item item)
     {
         if (item == null || !PassesWhitelist(item)) return false;
 
         bool success = dataStack.TryPush(item);
         displayer.UpdateVisuals(dataStack);
-
-        if (success) Debug.Log($"Receoved item: {item.name}");
-
         return success;
     }
 
-    public Holdable Item_Lose()
+    public Item Item_Lose()
     {
-        Holdable temp = dataStack.Pop();
+        Item temp = dataStack.Pop();
         displayer.UpdateVisuals(dataStack);
         return temp;
     }
     
-    public Holdable Item_Peek()
+    public Item Item_Peek()
     {
         return dataStack.Peek();
     }
 
-    private bool PassesWhitelist(Holdable item)
+    private bool PassesWhitelist(Item item)
     {
         if (!hasWhiteList) return true;
 
-        return _itemWhiteList.Contains(item.type);
+        return _itemWhiteList.Contains(item.Info.type);
     }
 }

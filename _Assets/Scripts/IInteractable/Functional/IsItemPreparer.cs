@@ -28,8 +28,8 @@ public class IsItemPreparer : MonoBehaviour, IInteractable, IMinigameSubscriber,
 
         if (inventory.IsEmpty) 
         {
-            Holdable item = callerInv.Item_Peek();
-            if (item == null || item.prepareMethod != preparerType) return;
+            Item item = callerInv.Item_Peek();
+            if (item == null || item.Info.prepareMethod != preparerType) return;
             inventory.Item_TryReceiveFrom(callerInv);
 
             minigame.StartMinigame();
@@ -41,8 +41,12 @@ public class IsItemPreparer : MonoBehaviour, IInteractable, IMinigameSubscriber,
 
     public void OnMinigameFinished()
     {
-        if (!inventory.IsFull || !inventory.Item_Peek().TryPrepare(out Holdable result)) return;
-        inventory.Item_Replace(result);
+        if (inventory.IsEmpty) return;
+
+        if (inventory.Item_Peek().TryReturnPreparedVersion(out Item result))
+            inventory.Item_Replace(result);
+
+        // inventory.Item_Peek().BecomePrepared();
     }
     
     private bool IsMinigameInProgress()

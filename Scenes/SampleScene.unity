@@ -3009,6 +3009,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4695718595785234368, guid: 63a6b5418e061284892d85f3c635199f, type: 3}
+      propertyPath: invSlots
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7773753047524525447, guid: 63a6b5418e061284892d85f3c635199f, type: 3}
       propertyPath: m_Name
       value: KitchenCounter
@@ -3265,6 +3269,10 @@ PrefabInstance:
     - target: {fileID: 2654400721409490678, guid: 63a6b5418e061284892d85f3c635199f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4695718595785234368, guid: 63a6b5418e061284892d85f3c635199f, type: 3}
+      propertyPath: invSlots
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7773753047524525447, guid: 63a6b5418e061284892d85f3c635199f, type: 3}
       propertyPath: m_Name
@@ -4446,6 +4454,10 @@ PrefabInstance:
     - target: {fileID: 2654400721409490678, guid: 63a6b5418e061284892d85f3c635199f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4695718595785234368, guid: 63a6b5418e061284892d85f3c635199f, type: 3}
+      propertyPath: invSlots
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7773753047524525447, guid: 63a6b5418e061284892d85f3c635199f, type: 3}
       propertyPath: m_Name

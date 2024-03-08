@@ -147,8 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa784d4544cddd40a78c6cb9d8a152e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots:
-  - {fileID: 0}
+  invSlots: 1
   hasWhiteList: 0
   item_WhiteList: 
   displayer: {fileID: 7490193961687779680}

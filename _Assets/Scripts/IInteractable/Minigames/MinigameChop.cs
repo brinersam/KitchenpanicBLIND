@@ -10,11 +10,11 @@ public class MinigameChop : MinigameBase // change this to minigame_clicker for 
 
     public override void StartMinigame()
     {
-        Holdable item = (caller as IInventory).Inventory.Item_Peek();
-        if (item == null || item.prepareResult == null)
+        var item = (caller as IInventory).Inventory.Item_Peek();
+        if (item == null || item.Info.prepareResult == null)
             return;
         
-        chopsRequired = item.ChopsOrHeatsRequired;
+        chopsRequired = item.Info.ChopsOrHeatsRequired;
         chopsLeft = chopsRequired;
         CurState = MinigameStateEnum.Ongoing;
     }
@@ -26,7 +26,7 @@ public class MinigameChop : MinigameBase // change this to minigame_clicker for 
             InterruptMinigame();
         }
 
-        chopsLeft -= 1;
+        chopsLeft -= chopPower;
         progressBar.Refresh(1- (float)chopsLeft/chopsRequired);
         if (chopsLeft <= 0)
         {
