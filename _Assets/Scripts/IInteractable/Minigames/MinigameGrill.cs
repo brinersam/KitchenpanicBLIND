@@ -10,8 +10,6 @@ public class MinigameGrill : MinigameBase // change this to minigame_wait for mo
     public override void StartMinigame()
     {
         Item item = (caller as IInventory).Inventory.Item_Peek();
-        if (item.Info.prepareResult == null)
-            return;
 
         heatRequired = item.Info.ChopsOrHeatsRequired;
         heatLeft = heatRequired;

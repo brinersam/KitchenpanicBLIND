@@ -11,8 +11,6 @@ public class MinigameChop : MinigameBase // change this to minigame_clicker for 
     public override void StartMinigame()
     {
         var item = (caller as IInventory).Inventory.Item_Peek();
-        if (item == null || item.Info.prepareResult == null)
-            return;
         
         chopsRequired = item.Info.ChopsOrHeatsRequired;
         chopsLeft = chopsRequired;

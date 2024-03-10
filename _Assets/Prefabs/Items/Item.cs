@@ -5,17 +5,17 @@ using UnityEngine;
 public class Item : IInventory
 {
     private ItemInfo info;
-    private readonly Inventory inventory;
+    private Inventory inventory;
     public Inventory Inventory => inventory;
     public ItemInfo Info => info;
-
     public Item(ItemInfo info)
     {
         this.info = info;
         if (info.invCapacity > 0)
-            {
-                inventory = new Inventory(info.invCapacity);
-            }
+        {
+            // todo turn Inventory into InventoryInternal(pure c#) and Inventory : MonoBehaviour (heavily relies on InventoryInternal)
+            inventory = new Inventory(info.invCapacity);  // note for the future, it works but on field check returns null
+        }
     }
 
     public bool TryReturnPreparedVersion(out Item result)

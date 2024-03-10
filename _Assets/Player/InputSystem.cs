@@ -61,7 +61,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""id"": ""c2e3906d-8133-4dcb-8537-06bdb0930b1a"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,

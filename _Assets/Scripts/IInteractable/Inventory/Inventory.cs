@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Collections;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, IEnumerable<Item>
 {   
     [SerializeField] private int invSlots = 1;
-    private LimitedSizeStack<Item> dataStack;
-
     [SerializeField] private bool hasWhiteList = false;
     [SerializeField] private ItemType[] item_WhiteList; // needs to be generic or bunsh of arrays with each having their own type
-    [SerializeField] public HasItemDisplayer displayer;
+
+    private LimitedSizeStack<Item> dataStack;
+    private ItemDisplayer displayer;
     readonly HashSet<ItemType> _itemWhiteList;
     public bool IsFull => dataStack.IsFull;
     public bool IsEmpty => dataStack.IsEmpty;
@@ -25,27 +26,29 @@ public class Inventory : MonoBehaviour
 
     void Awake()
     {
+        TryGetComponent(out ItemDisplayer disp);
+        displayer = disp;
+
         dataStack = new(invSlots);
 
         foreach(var i in item_WhiteList)    
             _itemWhiteList.Add(i);
         
-        displayer.UpdateVisuals(dataStack);
+        displayer.UpdateVisuals(this);
     }
 
-    public void Pull_PushItemFrom(Inventory giverInventory)
+    public void ItemPullPushFrom(Inventory giverInventory)
     {
-        Item topmostItem = giverInventory.Item_Peek();
-        if (topmostItem != null && topmostItem.Info.type == ItemType.Container) // i give up, this is too spaghetti i should follow the course for this one, hopefully i dont have to scrap too much code
-        {   
-            // giverInventory = topmostItem.Inventory;
-            // giverInventory.displayer = this.displayer;
-            // return;
-        }
+        // Item topmostItem = giverInventory.Item_Peek();
+        // if (topmostItem != null && topmostItem.Info.type == ItemType.Container) // i give up, this is too spaghetti i should follow the course for this one, hopefully i dont have to scrap too much code
+        // {   
+        //     // giverInventory = topmostItem.Inventory;
+        //     // giverInventory.displayer = this.displayer;
+        //     // return;
+        // }
         
-        if (!giverInventory.IsEmpty)
+        if (!giverInventory.IsEmpty && this.Item_TryReceiveFrom(giverInventory))
         {
-            this.Item_TryReceiveFrom(giverInventory);
             return;
         }
 
@@ -56,13 +59,17 @@ public class Inventory : MonoBehaviour
     {
         dataStack.Pop();
         dataStack.TryPush(item);
-        displayer.UpdateVisuals(dataStack);
+        displayer.UpdateVisuals(this);
     }
 
-    public void Item_TryReceiveFrom(Inventory giverInv)
+    public bool Item_TryReceiveFrom(Inventory giverInv)
     {
-        if (this.Item_TryReceive(giverInv.Item_Peek()))
+        bool success = Item_TryReceive(giverInv.Item_Peek());
+        if (success)
+        {
             giverInv.Item_Lose();
+        }
+        return success;
     }
 
     public bool Item_TryReceive(Item item)
@@ -70,14 +77,14 @@ public class Inventory : MonoBehaviour
         if (item == null || !PassesWhitelist(item)) return false;
 
         bool success = dataStack.TryPush(item);
-        displayer.UpdateVisuals(dataStack);
+        if (displayer != null) displayer.UpdateVisuals(this);
         return success;
     }
 
     public Item Item_Lose()
     {
         Item temp = dataStack.Pop();
-        displayer.UpdateVisuals(dataStack);
+        if (displayer != null) displayer.UpdateVisuals(this);
         return temp;
     }
     
@@ -91,5 +98,15 @@ public class Inventory : MonoBehaviour
         if (!hasWhiteList) return true;
 
         return _itemWhiteList.Contains(item.Info.type);
+    }
+
+    public IEnumerator<Item> GetEnumerator()
+    {
+        return dataStack.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 }
