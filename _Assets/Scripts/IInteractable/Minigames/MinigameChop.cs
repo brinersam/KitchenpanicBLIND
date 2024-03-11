@@ -8,7 +8,7 @@ public class MinigameChop : MinigameBase // change this to minigame_clicker for 
     private int chopsRequired = 0;
     private int chopsLeft;
 
-    public override void StartMinigame()
+    public override void Minigame_Start()
     {
         var item = (caller as IInventory).Inventory.Item_Peek();
         
@@ -17,18 +17,19 @@ public class MinigameChop : MinigameBase // change this to minigame_clicker for 
         CurState = MinigameStateEnum.Ongoing;
     }
 
-    protected override void Interact_Ongoing(bool alt)
+    protected override void Interact_Ongoing(bool alt, out bool rc)
     {
+        rc = false;
         if (alt)
         {
-            InterruptMinigame();
+            Minigame_Interrupt();
         }
 
         chopsLeft -= chopPower;
         progressBar.Refresh(1- (float)chopsLeft/chopsRequired);
         if (chopsLeft <= 0)
         {
-            FinishMinigame();
+            Minigame_ForceFinish();
         }
     }
 }

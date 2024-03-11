@@ -7,36 +7,54 @@ using UnityEngine.InputSystem;
 [RequireComponent (typeof(PlayerCursor))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private int Ms = 150;
-    [SerializeField] private Rigidbody Rbody;
+    [SerializeField] private float Ms = 4.5f;
 
     private PlayerCursor cursor;
     private InputSystem playerControls;
     private Animator animator;
 
-    private Vector3 mvmnt = Vector3.zero; 
-
     void Awake()
     {
         cursor= GetComponent<PlayerCursor>();
         animator= GetComponent<Animator>();
-        
         playerControls = new InputSystem();
+        playerControls.Gameplay.Enable();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        var temp = playerControls.Gameplay.Movement.ReadValue<Vector2>();
+        var mvmnt = new Vector3(temp.x,0,temp.y);
+
         animator.SetBool("IsWalking",mvmnt != Vector3.zero);
 
-        Rbody.velocity += Ms * Time.deltaTime * mvmnt;
-        
-        transform.forward = Vector3.Slerp(transform.forward,mvmnt, Time.deltaTime*12);
+        if (mvmnt == Vector3.zero) return;
+
+        MoveInDirection(mvmnt);
     }
 
-    private void OnMovement(InputValue input)
+    private void MoveInDirection (Vector3 movementDirection)
     {
-        Vector2 inMvmnt = input.Get<Vector2>();
-        mvmnt = new Vector3(inMvmnt.x,0,inMvmnt.y);
+        transform.forward = Vector3.Slerp(transform.forward,movementDirection, Time.deltaTime*15);
+        if (TryMove(movementDirection)) return;
+        if (TryMove(new Vector3(movementDirection.x,0,0))) return;
+        if (TryMove(new Vector3(0,0,movementDirection.z))) return;
+    }
+
+    private bool TryMove(Vector3 movementDirection)
+    {
+        // todo get capsule dimensions from an actual capsule from player object (add one)
+        if (!Physics.CapsuleCast(transform.position,
+                                transform.position + Vector3.up * 1f,
+                                0.20f,
+                                movementDirection,
+                                0.1f,
+                                (int)QueryTriggerInteraction.Ignore))
+        {
+            transform.position += Ms * Time.deltaTime * movementDirection;
+            return true;
+        }
+        return false;
     }
 
     private void OnMainInteract(InputValue input)

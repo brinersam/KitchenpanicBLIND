@@ -20,8 +20,8 @@ public class IsItemPreparer : MonoBehaviour, IInteractable, IMinigameSubscriber,
     {
         if (IsMinigameInProgress()) // redirect control to minigame
         {
-            minigame.Interact(alt);
-            return;
+            minigame.Interact(out bool controlReturned, alt);
+            if (!controlReturned) return;
         }
 
         Inventory callerInv = (caller as IInventory).Inventory;
@@ -32,7 +32,7 @@ public class IsItemPreparer : MonoBehaviour, IInteractable, IMinigameSubscriber,
             if (item == null || item.Info.prepareMethod != preparerType) return;
             inventory.Item_TryReceiveFrom(callerInv);
 
-            minigame.StartMinigame();
+            minigame.Minigame_Start();
             return;
         }
         

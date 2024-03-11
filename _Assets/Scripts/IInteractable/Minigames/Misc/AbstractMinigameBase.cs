@@ -10,7 +10,9 @@ public abstract class MinigameBase : MonoBehaviour
     }
 
     [SerializeField] protected ProgressBar progressBar;
-    private Action<bool> stateFunc;
+    //private Action<bool, bool> stateFunc;
+    private delegate void stateFuncDef (bool alt, out bool returnControl);
+    private stateFuncDef stateFunc;
 
     protected IMinigameSubscriber caller;
     private MinigameStateEnum curState;
@@ -26,31 +28,34 @@ public abstract class MinigameBase : MonoBehaviour
         curState = MinigameStateEnum.Offline;
     }
 
-    public void Interact(bool alt = false)
+    public void Interact(out bool returnControl, bool alt = false)
     {
-        stateFunc(alt);
+        stateFunc(alt, out bool control);
+        returnControl = control;
     }
 
-    public virtual void StartMinigame()
+    public virtual void Minigame_Start()
     {
         CurState = MinigameStateEnum.Ongoing;
     }
-    public virtual void InterruptMinigame()
+    public virtual void Minigame_Interrupt()
     {
         CurState = MinigameStateEnum.Offline;
     }
-    public virtual void FinishMinigame()
+    public virtual void Minigame_ForceFinish()
     {
-        InterruptMinigame();
+        Minigame_Interrupt();
         caller.OnMinigameFinished();
     }
 
-    protected virtual void Interact_Offline(bool alt)
+    protected virtual void Interact_Offline(bool alt, out bool rc)
     {
+        rc = false;
         return;
     }
-    protected virtual void Interact_Ongoing(bool alt)
+    protected virtual void Interact_Ongoing(bool alt, out bool rc)
     {
+        rc = false;
         return;
     }
     
