@@ -2,23 +2,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Linq;
 
 public class Inventory : MonoBehaviour, IEnumerable<Item>
 {   
     [SerializeField] private int invSlots = 1;
-    [SerializeField] private bool hasWhiteList = false;
-    [SerializeField] private ItemType[] item_WhiteList; // needs to be generic or bunsh of arrays with each having their own type
+    [SerializeField] private ItemType[] item_WhiteList; // needs to be generic or bunch of arrays with each having their own type
 
     private LimitedSizeStack<Item> dataStack;
     private ItemDisplayer displayer;
     readonly HashSet<ItemType> _itemWhiteList;
     public bool IsFull => dataStack.IsFull;
     public bool IsEmpty => dataStack.IsEmpty;
+    public ItemDisplayer Displayer => displayer;
+    private bool HasWhiteList => _itemWhiteList != null && _itemWhiteList.Any();
 
-    public Inventory (int invCapacity)
+    public Inventory (int invCapacity, ItemType[] whitelist = null)
     {
         if (invCapacity <= 0)
             throw new Exception("Attempt at initializing inventory of 0 slots!");
+        
+        if (whitelist != null)
+        {
+            _itemWhiteList = new();
+            foreach(var i in whitelist)    
+                _itemWhiteList.Add(i);
+        }
 
         invSlots = invCapacity;
         dataStack = new(invSlots);
@@ -34,19 +43,17 @@ public class Inventory : MonoBehaviour, IEnumerable<Item>
         foreach(var i in item_WhiteList)    
             _itemWhiteList.Add(i);
         
+        if (!this.IsEmpty)
+            UpdateVisuals();
+    }
+
+    public void UpdateVisuals()
+    {
         displayer.UpdateVisuals(this);
     }
 
-    public void ItemPullPushFrom(Inventory giverInventory)
+    public void Item_PullPushFrom(Inventory giverInventory)
     {
-        // Item topmostItem = giverInventory.Item_Peek();
-        // if (topmostItem != null && topmostItem.Info.type == ItemType.Container) // i give up, this is too spaghetti i should follow the course for this one, hopefully i dont have to scrap too much code
-        // {   
-        //     // giverInventory = topmostItem.Inventory;
-        //     // giverInventory.displayer = this.displayer;
-        //     // return;
-        // }
-        
         if (!giverInventory.IsEmpty && this.Item_TryReceiveFrom(giverInventory))
         {
             return;
@@ -57,9 +64,8 @@ public class Inventory : MonoBehaviour, IEnumerable<Item>
 
     public void Item_Replace(Item item)
     {
-        dataStack.Pop();
-        dataStack.TryPush(item);
-        displayer.UpdateVisuals(this);
+        dataStack.ReplaceTop(item);
+        UpdateVisuals();
     }
 
     public bool Item_TryReceiveFrom(Inventory giverInv)
@@ -77,14 +83,14 @@ public class Inventory : MonoBehaviour, IEnumerable<Item>
         if (item == null || !PassesWhitelist(item)) return false;
 
         bool success = dataStack.TryPush(item);
-        if (displayer != null) displayer.UpdateVisuals(this);
+        if (displayer != null) UpdateVisuals();;
         return success;
     }
 
     public Item Item_Lose()
     {
         Item temp = dataStack.Pop();
-        if (displayer != null) displayer.UpdateVisuals(this);
+        if (displayer != null) UpdateVisuals();;
         return temp;
     }
     
@@ -95,9 +101,9 @@ public class Inventory : MonoBehaviour, IEnumerable<Item>
 
     private bool PassesWhitelist(Item item)
     {
-        if (!hasWhiteList) return true;
+        if (!HasWhiteList) return true;
 
-        return _itemWhiteList.Contains(item.Info.type);
+        return _itemWhiteList.Contains(item.Info.type); // sometimes null item gets thorugh sometimes
     }
 
     public IEnumerator<Item> GetEnumerator()

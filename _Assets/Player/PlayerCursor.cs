@@ -10,7 +10,8 @@ public class PlayerCursor : MonoBehaviour, IInventory
     private IInteractable cursorSelection = null;
 
     private PlayerController plCntrl;
-    private Inventory inventory;
+    private Inventory inventory; // todo wrap this into inventoryToolUser where if top item is a tool, right click places it like a regular item
+    // but any other interaction goes through the wrapper (so this is where plate code goes)
     public Inventory Inventory { get => inventory; }
 
     private void Awake()

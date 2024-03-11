@@ -30,6 +30,13 @@ public class LimitedSizeStack<T> : IEnumerable<T>
         return false;
     }
 
+    public void ReplaceTop(T item)
+    {
+        if (curSize - 1 < 0) return;
+        
+        data[curSize-1] = item;
+    }
+
     public T Peek()
     {
         if (curSize - 1 < 0) return default;
@@ -47,7 +54,7 @@ public class LimitedSizeStack<T> : IEnumerable<T>
 
     public IEnumerator<T> GetEnumerator()
     {
-        for (int idx = 0; idx < curSize; idx++)
+        for (int idx = 0; idx < data.Length; idx++)
         {
             if (data[idx] == null) yield break;
             

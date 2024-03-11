@@ -18,4 +18,4 @@ MonoBehaviour:
   prepareMethod: 0
   prepareResult: {fileID: 0}
   ChopsOrHeatsRequired: -1
-  invCapacity: 3
+  invCapacity: 5
