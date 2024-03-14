@@ -4077,6 +4077,51 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1729948133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1729948135}
+  - component: {fileID: 1729948134}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1729948134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729948133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca16e996c18dd446b53527b83d32af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlateUi: {fileID: 8253755870206601773, guid: 538d0c06302a971448e5237200c5ef51, type: 3}
+--- !u!4 &1729948135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729948133}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.2144825, y: 3.6455667, z: -3.2792478}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1731760276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4392,10 +4437,6 @@ PrefabInstance:
     - target: {fileID: 7132365856487276621, guid: 558e2b2e2fc937448b801502c275059a, type: 3}
       propertyPath: m_Name
       value: ChoppingBoardCounter
-      objectReference: {fileID: 0}
-    - target: {fileID: 8829974422794426057, guid: 558e2b2e2fc937448b801502c275059a, type: 3}
-      propertyPath: invSlots
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5004,6 +5045,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1729948135}
   - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 674803050}
