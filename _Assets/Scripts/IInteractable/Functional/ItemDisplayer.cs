@@ -6,23 +6,18 @@ public class ItemDisplayer : MonoBehaviour
 {
     [SerializeField] private GameObject visualObj;
 
-    private GameObject itemSpecificUi;
-    bool initScheduled;
-    
     const int MAX_DRAW_DEPTH = 1;
+    const float ITEM_UI_HEIGHT_MOD = .8f;
 
     public void UpdateVisuals(Inventory inv) // todo this needs to sync with last stack operation so i dont redraw the entire thing each time inventory updates
     {// also add on updated from stack to IInventory so i cant forget to update it in some niche case
-        initScheduled = false;
         CleanUp();
         DrawInventory(inv);
-        CleanUpUI();
     }
 
-    private void DrawInventory(Inventory inv ,float yoffset = 0, int drawDepth = 0)
+    private float DrawInventory(Inventory inv ,float yoffset = 0, int drawDepth = 0)
     {
-        if (drawDepth > MAX_DRAW_DEPTH)
-            return;
+        if (drawDepth > MAX_DRAW_DEPTH) return 0;
 
         foreach (var i in inv)
         {
@@ -32,19 +27,15 @@ public class ItemDisplayer : MonoBehaviour
 
             if (i.Info.invCapacity > 0)
             {
-                initScheduled = true;
-                DrawInventory(i.Inventory, yoffset, drawDepth + 1);
+                if (drawDepth == 0 && i.Info.uiObj != null)
+                {
+                    DrawSubInvUI(i);
+                }
+
+                yoffset = DrawInventory(i.Inventory, yoffset, drawDepth + 1);
             }
         }
-
-        if (drawDepth == 0 &&
-            itemSpecificUi == null &&
-            initScheduled == true
-            )
-        {
-            itemSpecificUi = Instantiate(RuntimeUImngmt.ReceivePlateUi(), parent:visualObj.transform);
-            itemSpecificUi.transform.localPosition += Vector3.up * 1; 
-        }
+        return yoffset;
     }
 
     private void CleanUp()
@@ -55,12 +46,14 @@ public class ItemDisplayer : MonoBehaviour
         }
     }
 
-    private void CleanUpUI() // if we put this before drawInv (aka put it in cleanup), it will be destroyed when not needed
+    private void DrawSubInvUI(Item item)
     {
-        if (initScheduled == false && itemSpecificUi != null)
-        {
-            Destroy(itemSpecificUi);
-            Debug.Log("ui marked for destruction");
-        }
+        if (item.Inventory.IsEmpty) return;
+
+        var guiObj = Instantiate(item.Info.uiObj, parent:visualObj.transform);
+        guiObj.transform.localPosition += Vector3.up * ITEM_UI_HEIGHT_MOD; 
+
+        if (guiObj.TryGetComponent(out InvGUI itemGUI) == false) return;
+        itemGUI.UpdateVisuals(item.Inventory);
     }
 }

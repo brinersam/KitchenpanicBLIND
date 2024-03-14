@@ -21,4 +21,5 @@ public class ItemInfo : ScriptableObject
 
 /// Inventory
     public int invCapacity = 0;
+    public GameObject uiObj;
 }
