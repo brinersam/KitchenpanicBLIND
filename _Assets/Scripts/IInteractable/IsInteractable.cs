@@ -8,16 +8,15 @@ public class IsInteractable : MonoBehaviour, IInteractable
     [SerializeField] private MonoBehaviour IInteractableScript;
 
     private IInteractable InteractScript;
-    private MaterialPropertyBlock MPB;
 
     private void Awake()
     {
-        MPB = new MaterialPropertyBlock();
         InteractScript = (IInteractable)IInteractableScript;
     }
 
     public void ToggleHighlight(bool selected)
     {
+        MaterialPropertyBlock MPB = new MaterialPropertyBlock();
         if (selected)
         {
             MPB.SetFloat("_HighLighted",1);

@@ -32,8 +32,7 @@ public class PlayerCursor : MonoBehaviour, IInventory
 
     public void Interact(bool alt)
     {
-        if (cursorSelection == null) return;
-        cursorSelection.Interact(this, alt);
+        cursorSelection?.Interact(this, alt);
     }
     
     private void Target(Collider other)

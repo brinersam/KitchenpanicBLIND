@@ -15,6 +15,14 @@ public class ItemDisplayer : MonoBehaviour
         DrawInventory(inv);
     }
 
+    private void CleanUp()
+    {
+        foreach (Transform child in visualObj.transform) 
+        { 
+            Destroy(child.gameObject);
+        }
+    }
+
     private float DrawInventory(Inventory inv ,float yoffset = 0, int drawDepth = 0)
     {
         if (drawDepth > MAX_DRAW_DEPTH) return 0;
@@ -36,14 +44,6 @@ public class ItemDisplayer : MonoBehaviour
             }
         }
         return yoffset;
-    }
-
-    private void CleanUp()
-    {
-        foreach (Transform child in visualObj.transform) 
-        { 
-            Destroy(child.gameObject);
-        }
     }
 
     private void DrawSubInvUI(Item item)

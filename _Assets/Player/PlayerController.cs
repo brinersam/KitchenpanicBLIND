@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         // todo get capsule dimensions from an actual capsule from player object (add one)
         if (!Physics.CapsuleCast(transform.position,
-                                transform.position + Vector3.up * 1f,
+                                transform.position + Vector3.up,
                                 0.20f,
                                 movementDirection,
                                 0.1f,
@@ -61,9 +61,9 @@ public class PlayerController : MonoBehaviour
     {
         cursor.Interact(false);
     }
+
     private void OnAltInteract(InputValue input)
     {
         cursor.Interact(alt : true);
     }
-
 }

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Holdables", menuName = "Holdables/HoldableBase" )]
+[CreateAssetMenu(fileName = "Items", menuName = "Holdables/ItemBase" )]
 public class ItemInfo : ScriptableObject
 {
     public GameObject visualObj;

@@ -5,6 +5,4 @@ using UnityEngine;
 public interface IInventory
 {
     Inventory Inventory {get;}
-
-    
 }
