@@ -1,23 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
-    [SerializeField] Button StartBTN;
-    [SerializeField] Button SettingsBTN;
-    [SerializeField] Button QuitBTN;
+
+    [SerializeField] Button StartBTN = null;
+    [SerializeField] Button SettingsBTN = null;
+    [SerializeField] Button QuitBTN = null;
 
     private void Start() 
     {
-        StartBTN.onClick.AddListener(()=>Loader.LoadScene(Loader.ScenesEnum.Gameplay));
-        SettingsBTN.onClick.AddListener(bruh);
-        QuitBTN.onClick.AddListener(()=>{Debug.Log("QUITTING...");Application.Quit();});
+        ConfigureButton(StartBTN, ()=>Loader.LoadScene(Loader.ScenesEnum.Gameplay));
+        ConfigureButton(SettingsBTN);
+        ConfigureButton(QuitBTN, ()=>{Debug.Log("QUITTING...");Application.Quit();});
     }
     
-    public void bruh()
+    private void ConfigureButton(Button btn, UnityAction fun = null)
     {
-        Debug.Log("HIIIIIII");
+        if (btn == null) return;
+        
+        btn.onClick.AddListener(fun);
     }
+
 }

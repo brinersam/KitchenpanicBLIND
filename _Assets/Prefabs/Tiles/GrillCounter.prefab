@@ -105,7 +105,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1001 &5818886994163401079
+--- !u!1001 &3410651506445006223
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -113,63 +113,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5184491186952475985}
     m_Modifications:
-    - target: {fileID: 1810627953521507130, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
-      propertyPath: m_Name
-      value: Progress bar frame
-      objectReference: {fileID: 0}
-    - target: {fileID: 1810627953521507130, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7783604616783450910, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
+    - target: {fileID: 1804013399780998677, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7783604616783450910, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
+    - target: {fileID: 1804013399780998677, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8
+      value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7783604616783450910, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
+    - target: {fileID: 1804013399780998677, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7783604616783450910, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
+    - target: {fileID: 1804013399780998677, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7783604616783450910, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
+    - target: {fileID: 1804013399780998677, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7783604616783450910, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
+    - target: {fileID: 1804013399780998677, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7783604616783450910, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
+    - target: {fileID: 1804013399780998677, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7783604616783450910, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
+    - target: {fileID: 1804013399780998677, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7783604616783450910, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
+    - target: {fileID: 1804013399780998677, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7783604616783450910, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
+    - target: {fileID: 1804013399780998677, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8366905660518129947, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
+      propertyPath: m_Name
+      value: ProgressbarNew
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
---- !u!114 &231504751805645994 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
+--- !u!114 &1110886856220368736 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6050215273715254749, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
-  m_PrefabInstance: {fileID: 5818886994163401079}
+  m_CorrespondingSourceObject: {fileID: 2323779120215124719, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
+  m_PrefabInstance: {fileID: 3410651506445006223}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -177,10 +173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b41cfc2e6b4b146ba7967ebdb7d0be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &4378692688056668777 stripped
+--- !u!4 &3917064979910724506 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 7783604616783450910, guid: dc32b2c2fd0fafc4ab5a927636e3a604, type: 3}
-  m_PrefabInstance: {fileID: 5818886994163401079}
+  m_CorrespondingSourceObject: {fileID: 1804013399780998677, guid: 5c0702b7c3a45884abc33979c66eb1e4, type: 3}
+  m_PrefabInstance: {fileID: 3410651506445006223}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7433125150898624272
 PrefabInstance:
@@ -246,7 +242,7 @@ PrefabInstance:
       addedObject: {fileID: 8870519784765471291}
     - targetCorrespondingSourceObject: {fileID: 2365727588655530561, guid: 78a3f40743836214caf0453da848330a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4378692688056668777}
+      addedObject: {fileID: 3917064979910724506}
     - targetCorrespondingSourceObject: {fileID: 5642118644275026089, guid: 78a3f40743836214caf0453da848330a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8170332508305826072}
@@ -326,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8699c09589add940bf62895caf2bbf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressBar: {fileID: 231504751805645994}
+  progressBar: {fileID: 1110886856220368736}
   heatPower: 1
 --- !u!114 &7632329600738220850
 MonoBehaviour:
@@ -341,9 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invSlots: 1
-  hasWhiteList: 0
   item_WhiteList: 
-  displayer: {fileID: 6721081304948310852}
 --- !u!4 &2984504409834819513 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5642118644275026089, guid: 78a3f40743836214caf0453da848330a, type: 3}

@@ -14,8 +14,8 @@ public class Item : IInventory
         if (info.invCapacity > 0)
         {
             // todo turn Inventory into InventoryInternal(pure c#) and Inventory : MonoBehaviour (heavily relies on InventoryInternal)
-            ItemType[] plateWhiteList = new[]{ItemType.Ingredient_Prepared, ItemType.Ingredient_Trash}; // todo move this into iteminfo of plate
-            inventory = new Inventory(info.invCapacity, plateWhiteList);  // note for the future, it works but on field check returns null
+            //ItemType[] plateWhiteList = new[]{ItemType.Ingredient_Prepared, ItemType.Ingredient_Trash}; // todo move this into iteminfo of plate
+            inventory = new Inventory(info.invCapacity);// plateWhiteList);  // note for the future, it works but on field check returns null
         }
     }
 

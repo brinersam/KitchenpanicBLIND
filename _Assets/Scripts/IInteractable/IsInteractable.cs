@@ -16,7 +16,7 @@ public class IsInteractable : MonoBehaviour, IInteractable
 
     public void ToggleHighlight(bool selected)
     {
-        MaterialPropertyBlock MPB = new MaterialPropertyBlock();
+        MaterialPropertyBlock MPB = new();
         if (selected)
         {
             MPB.SetFloat("_HighLighted",1);

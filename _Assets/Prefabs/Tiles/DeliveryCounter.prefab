@@ -63,6 +63,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8062420682854627632, guid: 78a3f40743836214caf0453da848330a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6151687152790051433}
+    - targetCorrespondingSourceObject: {fileID: 8062420682854627632, guid: 78a3f40743836214caf0453da848330a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1863914958794765954}
   m_SourcePrefab: {fileID: 100100000, guid: 78a3f40743836214caf0453da848330a, type: 3}
 --- !u!1 &334814863472476691 stripped
 GameObject:
@@ -82,7 +85,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshToHighlight: {fileID: 4468646483383587202}
-  IInteractableScript: {fileID: 0}
+  IInteractableScript: {fileID: 1863914958794765954}
+--- !u!114 &1863914958794765954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334814863472476691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5b4910b67cfa940b631edf129e4ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &4468646483383587202 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6144364477591792289, guid: 78a3f40743836214caf0453da848330a, type: 3}
