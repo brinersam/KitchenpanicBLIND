@@ -25,20 +25,15 @@ public static class DishDeliverySystem
     public static bool TryAcceptDish(Item plate)
     {
         bool recipeAccepted = false;
-        int plateHash = RecipeHashFun.GetHash(plate);
+        int plateHash = plate.GetHashCode();
 
-        Debug.Log($"{plate.Info.name} hash : {plateHash} being compared to:");
 
         foreach (var recipe in helper.recipesArr) // todo switch to current requests instead of just the ones available
         {
-            Debug.Log($"                {recipe.recipeName} hash : {RecipeHashFun.GetHash(recipe)}");
-
-            if (recipeAccepted) break;
-
-            // if (plate.GetHashCode() == recipe.GetHashCode()) // todo use running hash if this is expensive
-            if (plateHash == RecipeHashFun.GetHash(recipe))
+            if (plateHash == recipe.GetHashCode())
             {
                 recipeAccepted = true;
+                break;
             }
         }
         
@@ -49,7 +44,7 @@ public static class DishDeliverySystem
 
     public static RecipeSO RequestNewDish(RecipeRarity forcedRarity)
     {
-        return helper.recipesArr[0];
+        return helper.recipesArr[Random.Range(0,helper.recipesArr.Length)];
     }
         
 

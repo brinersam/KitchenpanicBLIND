@@ -13,8 +13,10 @@ public class RecipeSO : ScriptableObject
     public ItemInfo[] ingredients; // make a serializable struct so it can be displayed in the editor todo
     public int[] amountEach; //  -----^
 
-    [SerializeField] private int approxSecToPrepare = -1; // set by designer or autocalculates based on the ingredients // todo button in editor to calculate
+    [SerializeField] private int approxSecToPrepare = -1;
+
     private int approxSecToPrepareCalculated = 0;
+    private int hash;
 
     public int SecToPrepare { 
         get {
@@ -29,11 +31,20 @@ public class RecipeSO : ScriptableObject
     {
         if (approxSecToPrepare == -1)
             CalculateTime();
+
+        if (hash == default)
+            RecalculateHash();
+    }
+
+    public override int GetHashCode()
+    {
+        return hash;
     }
 
     private void CalculateTime()
     {
         float resultTime = 0;
+
         for(int idx = 0; idx < ingredients.Length; idx++)
         {
             if (ingredients[idx] == null) break;
@@ -60,11 +71,18 @@ public class RecipeSO : ScriptableObject
             }
             case PreparationEnum.Chop:
             {
-                CorHReq /= 3;
+                CorHReq /= 3; // we expect player to be able to chop 3 times per seconds
                 break;
             }
         }
         return CorHReq;
     }
 
+    private void RecalculateHash()
+    {
+        hash = RecipeHashClass.ExtractHash(ingredients,itemAmountArray: amountEach);
+
+        if (hash == default)
+            Debug.LogWarning($"Hash for recipe {this.recipeName} is recalculated to a zero!", this);
+    }
 }

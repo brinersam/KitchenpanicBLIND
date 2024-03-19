@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinigameChop : MinigameBase // change this to minigame_clicker for modularity
+public class MinigameClick : MinigameBase // change this to minigame_clicker for modularity
 {
-    [SerializeField] private int chopPower = 4;
-    private int chopsRequired = 0;
-    private int chopsLeft;
+    [SerializeField] private int clickPower = 1;
+    private int clicksRequired = 0;
+    private int clicksLeft;
 
     public override void Minigame_Start()
     {
         var item = (caller as IInventory).Inventory.Item_Peek();
         
-        chopsRequired = item.Info.ChopsOrHeatsRequired;
-        chopsLeft = chopsRequired;
+        clicksRequired = item.Info.ChopsOrHeatsRequired;
+        clicksLeft = clicksRequired;
         CurState = MinigameStateEnum.Ongoing;
     }
 
@@ -25,9 +25,9 @@ public class MinigameChop : MinigameBase // change this to minigame_clicker for 
             Minigame_Interrupt();
         }
 
-        chopsLeft -= chopPower;
-        progressBar.Refresh(1- (float)chopsLeft/chopsRequired);
-        if (chopsLeft <= 0)
+        clicksLeft -= clickPower;
+        progressBar.Refresh(1- (float)clicksLeft/clicksRequired);
+        if (clicksLeft <= 0)
         {
             Minigame_ForceFinish();
         }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class MinigameBase : MonoBehaviour
+public abstract class MinigameBase: MonoBehaviour
 {
     public enum MinigameStateEnum
     {
@@ -10,7 +10,7 @@ public abstract class MinigameBase : MonoBehaviour
     }
 
     [SerializeField] protected ProgressBar progressBar;
-    //private Action<bool, bool> stateFunc;
+    
     private delegate void stateFuncDef (bool alt, out bool returnControl);
     private stateFuncDef stateFunc;
 

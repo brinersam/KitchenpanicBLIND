@@ -1477,7 +1477,7 @@ PrefabInstance:
     - target: {fileID: 3399952516329181591, guid: 46e1b35fa30fb9f459f4babfc247a87f, type: 3}
       propertyPath: itemToGive
       value: 
-      objectReference: {fileID: 11400000, guid: d8d99da0006bb8842bd5508de9c4a43d, type: 2}
+      objectReference: {fileID: 11400000, guid: c795b4b33f7d86b4aa66d6d96b6ea99a, type: 2}
     - target: {fileID: 5560360140945422286, guid: 46e1b35fa30fb9f459f4babfc247a87f, type: 3}
       propertyPath: m_Name
       value: IngredientCounter (1)

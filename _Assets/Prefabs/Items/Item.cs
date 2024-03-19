@@ -19,6 +19,11 @@ public class Item : IInventory
         }
     }
 
+    public override int GetHashCode()
+    {
+        return RecipeHashClass.ExtractHash(inventory, (x) => x.Info);
+    }
+
     public bool TryReturnPreparedVersion(out Item result)
     {
         if (info.prepareMethod == PreparationEnum.None)

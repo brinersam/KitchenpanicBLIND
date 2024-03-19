@@ -1,21 +1,24 @@
 using System.Collections;
 using UnityEngine;
 
-public class MinigameGrill : MinigameBase // change this to minigame_wait for modularity
+public class MinigameWait : MinigameBase // change this to minigame_wait for modularity
 {
-    [SerializeField] private int heatPower = 4;
-    private int heatRequired = 0;
-    private int heatLeft;
+    [SerializeField] private float secPower = 1;
+    private int secsRequired = 0;
+    private float secsLeft;
+
+    Coroutine minigame;
+
 
     public override void Minigame_Start()
     {
         Item item = (caller as IInventory).Inventory.Item_Peek();
         if (item.Info.prepareResult == null) return;
 
-        heatRequired = item.Info.ChopsOrHeatsRequired;
-        heatLeft = heatRequired;
+        secsRequired = item.Info.ChopsOrHeatsRequired;
+        secsLeft = secsRequired;
 
-        StartCoroutine("Minigame");
+        StartCoroutine("Minigame",item);
         CurState = MinigameStateEnum.Ongoing;
     }
     public override void Minigame_Interrupt()
@@ -30,13 +33,23 @@ public class MinigameGrill : MinigameBase // change this to minigame_wait for mo
         Minigame_Interrupt();
     }
 
-    private IEnumerator Minigame()
+    private IEnumerator Minigame(Item item)
     {
-        while (heatLeft > 0)
+        while (secsLeft > 0)
         {
-            heatLeft -= heatPower;
-            progressBar.Refresh(1 - (float)heatLeft/heatRequired);
-            yield return new WaitForSeconds(1); 
+            secsLeft -= secPower/2;
+            float pct = 1 - secsLeft/secsRequired;
+            progressBar.Refresh(pct);
+
+            if (item.Info.prepareResult.type == ItemType.Ingredient_Trash)
+            {
+                if (pct > 0.6)
+                    progressBar.Warning_Pulse();
+                if (pct > 0.9)
+                    progressBar.Warning_Pulse(true);
+            }
+
+            yield return new WaitForSeconds(0.5f); 
         }
         Minigame_ForceFinish();
         Minigame_Start();

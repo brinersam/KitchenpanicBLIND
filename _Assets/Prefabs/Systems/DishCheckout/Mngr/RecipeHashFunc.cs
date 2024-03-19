@@ -1,32 +1,32 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 
-public static class RecipeHashFun
+public static class RecipeHashClass
 {
-    public static int GetHash(RecipeSO recipe)
+    public static int ExtractHash<T>(IEnumerable<T> inv, Func<T,ItemInfo> fun = null, int[] itemAmountArray = null)
     {
-        return ExtractHash(recipe.ingredients);
-    }
-    public static int GetHash(Item item)
-    {
-        return ExtractHash(item.Inventory, (x) => x.Info);
-    }
+        int cumHash = 0;
 
-    private static int ExtractHash<T>(IEnumerable<T> inv, Func<T,ItemInfo> fun = null)
-    {
-        int cumSum = 0;
+        int idx = 0;
         foreach (var i in inv)
         {
             unchecked
-            {
+            {   
+                int curElementHash = 0;
                 if (fun == null)
-                    cumSum += i.GetHashCode(); 
+                    curElementHash += i.GetHashCode(); 
                 else
-                    cumSum += fun(i).GetHashCode(); // Func
+                    curElementHash += fun(i).GetHashCode();
+
+
+                if (itemAmountArray != null)
+                    curElementHash *= itemAmountArray[idx];
+
+                cumHash += curElementHash;
             }
+            idx++;
         }
-        return cumSum;
+        return cumHash;
     }
 }

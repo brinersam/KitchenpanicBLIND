@@ -18,3 +18,5 @@ MonoBehaviour:
   prepareMethod: 0
   prepareResult: {fileID: 0}
   ChopsOrHeatsRequired: 6
+  invCapacity: 0
+  uiObj: {fileID: 0}
