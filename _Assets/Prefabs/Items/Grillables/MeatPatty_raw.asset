@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1618630aa95621446b382dcc399b0955, type: 3}
   m_Name: MeatPatty_raw
   m_EditorClassIdentifier: 
-  visualObj: {fileID: 919132149155446097, guid: 02a24f0f7eb1b624ab903663ee9a248c, type: 3}
+  visualObj: {fileID: 5387602174971222882, guid: a9c122de36b18484492ae66d3df437cf, type: 3}
   icon: {fileID: 21300000, guid: aa1bacc24dde76e47b2ec0dd4e82385b, type: 3}
   type: 6
   prepareMethod: 1
   prepareResult: {fileID: 11400000, guid: c795b4b33f7d86b4aa66d6d96b6ea99a, type: 2}
+  ChopsOrHeatsRequired: 6
+  invCapacity: 0
+  uiObj: {fileID: 0}

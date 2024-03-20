@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1618630aa95621446b382dcc399b0955, type: 3}
   m_Name: MeatPatty_cooked
   m_EditorClassIdentifier: 
-  visualObj: {fileID: 919132149155446097, guid: 598a91cf1806eae49abf8273f6ad8ffa, type: 3}
+  visualObj: {fileID: 2024615519871545608, guid: 6f1f279c268d34041aa472ab24b59e05, type: 3}
   icon: {fileID: 21300000, guid: f1f50c7ef90b19741b26f2040806cf56, type: 3}
   type: 1
   prepareMethod: 1

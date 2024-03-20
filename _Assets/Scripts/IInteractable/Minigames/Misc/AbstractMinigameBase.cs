@@ -10,22 +10,23 @@ public abstract class MinigameBase: MonoBehaviour
     }
 
     [SerializeField] protected ProgressBar progressBar;
+    [SerializeField] protected AudioSource audioSrc;
     
     private delegate void stateFuncDef (bool alt, out bool returnControl);
     private stateFuncDef stateFunc;
 
     protected IMinigameSubscriber caller;
-    private MinigameStateEnum curState;
+    private MinigameStateEnum __curState;
 
     public MinigameStateEnum CurState 
-    {   get { return curState; }
-        protected set { curState = ChangeState(value); }  
+    {   get { return __curState; }
+        protected set { __curState = ChangeState(value); }  
     }
 
     public void Initialize(IMinigameSubscriber caller)
     {
         this.caller = caller;
-        curState = MinigameStateEnum.Offline;
+        CurState = MinigameStateEnum.Offline; // if minigames break i changed __curState to this
     }
 
     public void Interact(out bool returnControl, bool alt = false)

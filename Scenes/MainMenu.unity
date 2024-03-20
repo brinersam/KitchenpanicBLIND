@@ -464,8 +464,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68b5648fce3e8348bd271c77a1628ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartBTN: {fileID: 1260658460}
-  SettingsBTN: {fileID: 0}
+  LoadGameplaySceneBTN: {fileID: 1260658460}
+  LoadMainMenuSceneBTN: {fileID: 0}
+  SettingsBTN: {fileID: 1291611303}
+  UnpauseBTN: {fileID: 0}
   QuitBTN: {fileID: 579743011}
 --- !u!1001 &619414253
 PrefabInstance:
@@ -788,6 +790,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4077478589573023641, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
   m_PrefabInstance: {fileID: 1291611301}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1291611303 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5928868814759377048, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
+  m_PrefabInstance: {fileID: 1291611301}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1469977809
 GameObject:
   m_ObjectHideFlags: 0

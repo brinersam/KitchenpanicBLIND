@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent (typeof(Animator))]
 [RequireComponent (typeof(PlayerCursor))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour//, InputSystem.IGameplayActions
 {
     [SerializeField] private float Ms = 4.5f;
 
@@ -13,12 +13,16 @@ public class PlayerController : MonoBehaviour
     private InputSystem playerControls;
     private Animator animator;
 
+    private GameplayUI userInterface;
+
     void Awake()
     {
         cursor= GetComponent<PlayerCursor>();
         animator= GetComponent<Animator>();
         playerControls = new InputSystem();
         playerControls.Gameplay.Enable();
+        
+        userInterface = GameObject.FindGameObjectsWithTag("userInterface")[0].GetComponent<GameplayUI>(); // ew strings
     }
 
     private void Update()
@@ -65,5 +69,10 @@ public class PlayerController : MonoBehaviour
     private void OnAltInteract(InputValue input)
     {
         cursor.Interact(alt : true);
+    }
+
+    private void OnMenuButton(InputValue input)
+    {
+        userInterface.OnMenuBtn();
     }
 }

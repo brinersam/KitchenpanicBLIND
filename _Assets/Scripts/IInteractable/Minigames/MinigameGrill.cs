@@ -3,12 +3,15 @@ using UnityEngine;
 
 public class MinigameWait : MinigameBase // change this to minigame_wait for modularity
 {
+    [SerializeField] AudioClip activeAmbienceClip;
     [SerializeField] private float secPower = 1;
     private int secsRequired = 0;
     private float secsLeft;
 
-    Coroutine minigame;
-
+    private void Awake()
+    {
+        audioSrc.clip = activeAmbienceClip;
+    }
 
     public override void Minigame_Start()
     {
@@ -18,11 +21,16 @@ public class MinigameWait : MinigameBase // change this to minigame_wait for mod
         secsRequired = item.Info.ChopsOrHeatsRequired;
         secsLeft = secsRequired;
 
+        if (audioSrc.isPlaying == false)
+            audioSrc.Play();
+
         StartCoroutine("Minigame",item);
         CurState = MinigameStateEnum.Ongoing;
     }
     public override void Minigame_Interrupt()
     {
+        audioSrc.Stop();
+
         StopCoroutine("Minigame");
         CurState = MinigameStateEnum.Offline;
     }
@@ -45,7 +53,7 @@ public class MinigameWait : MinigameBase // change this to minigame_wait for mod
             {
                 if (pct > 0.6)
                     progressBar.Warning_Pulse();
-                if (pct > 0.9)
+                else if (pct > 0.9)
                     progressBar.Warning_Pulse(true);
             }
 

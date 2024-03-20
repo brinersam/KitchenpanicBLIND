@@ -6,18 +6,31 @@ public class ProgressBar : MonoBehaviour
 {
     [SerializeField] Transform bar;
 
-    [SerializeField] AudioSource panicSound;
+
+    private bool panicOdd;
+    [SerializeField] AudioSource audioSrc;
     [SerializeField] AudioClip ProgressBar_Warning;
     [SerializeField] AudioClip ProgressBar_WarningFinal;
-    [SerializeField] GameObject warningBlinkerUI;
+
+    [SerializeField] GameObject warningBlinkerObj;
+
+    private Color defaultClr;
+    private SpriteRenderer fillBarRndrr;
 
     readonly (float scale,float pos) emptyXScalePos = (0,-0.4f); // bad magic
     readonly (float scale,float pos) fullXScalePos = (0.8f,0); // bad magic
 
+    void Awake()
+    {
+        fillBarRndrr = bar.GetComponent<SpriteRenderer>();
+        defaultClr = fillBarRndrr.color;
+    }
+
     void OnEnable() 
     {
         Refresh(0);
-        warningBlinkerUI.SetActive(false);
+        fillBarRndrr.color = defaultClr;
+        warningBlinkerObj.SetActive(false);
     }
 
     public void Refresh(float pct)
@@ -34,17 +47,29 @@ public class ProgressBar : MonoBehaviour
         bar.localPosition = newPos;
     }
 
-    public void Warning_Pulse(bool final = false)
+    public void Warning_Pulse(bool extraBad = false)
     {
-        if (!warningBlinkerUI.activeSelf)
-            warningBlinkerUI.SetActive(true);
+        if (!warningBlinkerObj.activeSelf)
+            warningBlinkerObj.SetActive(true);
 
-        if (final)
-            panicSound.PlayOneShot(ProgressBar_WarningFinal);
-        else
-            panicSound.PlayOneShot(ProgressBar_Warning,0.7f);
+        panicOdd = !panicOdd;
 
-        warningBlinkerUI.transform.Rotate(Vector3.forward * 34);
+        if (panicOdd) // first
+        {
+            fillBarRndrr.color = Color.red;
+            warningBlinkerObj.transform.localScale *= 2f;
+            
+        }
+        else if (panicOdd == false) // second
+        {
+            fillBarRndrr.color = Color.white;
+            warningBlinkerObj.transform.localScale = Vector3.one;
+        }
+
+        audioSrc.PlayOneShot(ProgressBar_Warning,0.7f);
+
+        if (extraBad)
+            audioSrc.PlayOneShot(ProgressBar_WarningFinal);
     }
 
 }
