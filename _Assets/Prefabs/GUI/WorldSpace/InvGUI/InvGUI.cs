@@ -1,25 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InvGUI : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer[] Icons;
 
-    public void UpdateVisuals(Inventory slots) // todo make adaptive
+    public void UpdateVisuals(IEnumerable<ItemInfo> collection)
     {
-        IEnumerator slotsEnumerator = slots.GetEnumerator();
-        
-        foreach (SpriteRenderer child in Icons)
+        IEnumerator<ItemInfo> itemIEnum = collection.GetEnumerator();
+
+        foreach (SpriteRenderer icon in Icons)
         {
-            if (slotsEnumerator.MoveNext() && slotsEnumerator.Current != null)
+            if (itemIEnum.MoveNext() && itemIEnum.Current != null)
             {
-                child.transform.parent.gameObject.SetActive(true);
-                child.sprite = ((Item)slotsEnumerator.Current).Info.icon;
+                icon.transform.parent.gameObject.SetActive(true);
+                icon.sprite = itemIEnum.Current.icon;
             }
             else
             {
-                child.transform.parent.gameObject.SetActive(false);
+                icon.transform.parent.gameObject.SetActive(false);
             }
         }
     }

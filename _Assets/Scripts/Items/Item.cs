@@ -21,7 +21,7 @@ public class Item : IInventory
 
     public override int GetHashCode()
     {
-        return RecipeHashClass.ExtractHash(inventory, (x) => x.Info);
+        return RecipeHashClass.ExtractHash(inventory);
     }
 
     public bool TryReturnPreparedVersion(out Item result)

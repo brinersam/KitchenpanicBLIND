@@ -4,7 +4,7 @@ using System.Linq;
 
 public static class RecipeHashClass
 {
-    public static int ExtractHash<T>(IEnumerable<T> inv, Func<T,ItemInfo> fun = null, int[] itemAmountArray = null)
+    public static int ExtractHash(IEnumerable<ItemInfo> inv, int[] itemAmountArray = null)
     {
         int cumHash = 0;
 
@@ -14,11 +14,8 @@ public static class RecipeHashClass
             unchecked
             {   
                 int curElementHash = 0;
-                if (fun == null)
-                    curElementHash += i.GetHashCode(); 
-                else
-                    curElementHash += fun(i).GetHashCode();
 
+                curElementHash += i.GetHashCode(); 
 
                 if (itemAmountArray != null)
                     curElementHash *= itemAmountArray[idx];

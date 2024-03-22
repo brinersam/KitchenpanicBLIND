@@ -27,9 +27,10 @@ public static class DishDeliverySystem
         bool recipeAccepted = false;
         int plateHash = plate.GetHashCode();
 
-
+        Debug.Log($"Comparing hash of dish on the plate {plateHash} to:");
         foreach (var recipe in helper.recipesArr) // todo switch to current requests instead of just the ones available
         {
+            Debug.Log($"            Recipe : {recipe.recipeName}; Hash: {recipe.GetHashCode()}");
             if (plateHash == recipe.GetHashCode())
             {
                 recipeAccepted = true;

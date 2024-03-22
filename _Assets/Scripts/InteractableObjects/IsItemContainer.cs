@@ -16,13 +16,13 @@ public class IsItemContainer : MonoBehaviour, IInteractable, IInventory
 
         if (playerTopSlot != null && playerTopSlot.Info.type == ItemType.Container)
         {   
-            if (alt || playerTopSlot.Inventory.IsEmpty)
+            if (alt || (playerTopSlot.Inventory.IsEmpty && inventory.IsEmpty))
             {
                 inventory.Item_TryReceiveFrom(playerInv);
             }
             else
             {
-                inventory.Item_PullPushFrom(playerTopSlot.Inventory); // plate pickup dont work fix this todo
+                inventory.Item_PullPushFrom(playerTopSlot.Inventory);
                 playerInv.UpdateVisuals();
             }
             return;

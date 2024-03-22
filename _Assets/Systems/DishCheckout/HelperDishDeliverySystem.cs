@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HelperDishDeliverySystem : MonoBehaviour
 {
-    [SerializeField] private GameObject timerUI; // todo
+    [SerializeField] private MonoBehaviour timerUIscript;
     public RecipeSO[] recipesArr;
     void Awake()
     {

@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Linq;
 
-public class Inventory : MonoBehaviour, IEnumerable<Item>
+public class Inventory : MonoBehaviour, IEnumerable<Item>, IEnumerable<ItemInfo>
 {   
     [SerializeField] private int invSlots = 1;
     [SerializeField] private ItemType[] item_WhiteList; // needs to be generic or bunch of arrays with each having their own type
@@ -111,8 +111,21 @@ public class Inventory : MonoBehaviour, IEnumerable<Item>
         return dataStack.GetEnumerator();
     }
 
+    private IEnumerator<ItemInfo> GetEnumerator_ItemInfo()
+    {
+        foreach(Item item in dataStack)
+        {
+            yield return item.Info;
+        }
+    }
+
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
+    }
+
+    IEnumerator<ItemInfo> IEnumerable<ItemInfo>.GetEnumerator()
+    {
+        return GetEnumerator_ItemInfo();
     }
 }
