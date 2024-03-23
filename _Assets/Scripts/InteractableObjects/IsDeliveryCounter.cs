@@ -14,7 +14,7 @@ public class IsDeliveryCounter : MonoBehaviour, IInteractable
 
         if (topmostItem.Info.type == ItemType.Container)
         {
-            if (DishDeliverySystem.TryAcceptDish(topmostItem))
+            if (System_DishMgr.TryAcceptDish(topmostItem))
                 playerInv.Item_Lose();
         }
     }

@@ -13,16 +13,12 @@ public class PlayerController : MonoBehaviour//, InputSystem.IGameplayActions
     private InputSystem playerControls;
     private Animator animator;
 
-    private GameplayUI userInterface;
-
     void Awake()
     {
         cursor= GetComponent<PlayerCursor>();
         animator= GetComponent<Animator>();
         playerControls = new InputSystem();
         playerControls.Gameplay.Enable();
-        
-        userInterface = GameObject.FindGameObjectsWithTag("userInterface")[0].GetComponent<GameplayUI>(); // ew strings
     }
 
     private void Update()
@@ -73,6 +69,6 @@ public class PlayerController : MonoBehaviour//, InputSystem.IGameplayActions
 
     private void OnMenuButton(InputValue input)
     {
-        userInterface.OnMenuBtn();
+        System_UI.OnMenuBtn();
     }
 }

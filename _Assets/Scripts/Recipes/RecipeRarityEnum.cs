@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum RecipeRarity
+public enum RecipeRarity // unused
 {
     Common = 0,
     Uncommon = 1,

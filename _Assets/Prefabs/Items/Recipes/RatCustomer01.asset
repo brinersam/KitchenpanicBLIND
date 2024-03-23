@@ -17,5 +17,11 @@ MonoBehaviour:
   ingredients:
   - {fileID: 11400000, guid: 0b8300d2739add74d85a2cc2bff64943, type: 2}
   - {fileID: 11400000, guid: 072e772a633c19741b9eb2ebc446bca8, type: 2}
-  amountEach: 0100000007000000
-  approxTimeToPrepareSec: 0
+  - {fileID: 11400000, guid: 072e772a633c19741b9eb2ebc446bca8, type: 2}
+  - {fileID: 11400000, guid: 072e772a633c19741b9eb2ebc446bca8, type: 2}
+  - {fileID: 11400000, guid: 072e772a633c19741b9eb2ebc446bca8, type: 2}
+  - {fileID: 11400000, guid: 072e772a633c19741b9eb2ebc446bca8, type: 2}
+  - {fileID: 11400000, guid: 072e772a633c19741b9eb2ebc446bca8, type: 2}
+  - {fileID: 11400000, guid: 072e772a633c19741b9eb2ebc446bca8, type: 2}
+  amountEach: 0100000001000000010000000100000001000000010000000100000001000000
+  approxSecToPrepare: -1

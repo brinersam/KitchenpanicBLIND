@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class PauseManager
+public static class System_Pauser
 {
     private static bool pauseActive = false;
     public static bool PauseActive => pauseActive;

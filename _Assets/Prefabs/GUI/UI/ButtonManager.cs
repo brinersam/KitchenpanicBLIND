@@ -30,7 +30,7 @@ public class ButtonManager : MonoBehaviour
         
         ConfigureButton(SettingsBTN);
 
-        ConfigureButton(UnpauseBTN, ()=>PauseManager.Pause_Off());
+        ConfigureButton(UnpauseBTN, ()=>System_Pauser.Pause_Off());
 
         ConfigureButton(QuitBTN, ()=>{Debug.Log("QUITTING...");Application.Quit();});
     }

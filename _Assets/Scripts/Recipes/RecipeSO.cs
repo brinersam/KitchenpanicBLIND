@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RecipeSO", menuName = "SObjects/RecipeBase" )]
 public class RecipeSO : ScriptableObject
 {
-    const float DIFFICULTY_TIME_MOD = 1.5f;
+    private float difficulty_time_mod = 1f;
 
     public string recipeName;
     public RecipeRarity rarity;
@@ -29,12 +29,20 @@ public class RecipeSO : ScriptableObject
 
     void OnEnable() 
     {
+        //System_DishMgr.OnScenarioChange += OnScenarioChange;
+
         if (approxSecToPrepare == -1)
             CalculateTime();
 
         if (hash == default)
             RecalculateHash();
     }
+
+    // void OnScenarioChange()
+    // {
+    //     difficulty_time_mod = System_DishMgr.Scenario.recipeCompletionPts_mod;
+    //     CalculateTime();
+    // }
 
     public override int GetHashCode()
     {
@@ -50,7 +58,7 @@ public class RecipeSO : ScriptableObject
             if (ingredients[idx] == null) break;
 
             int CorHReq = CalculateIngredientTime(ingredients[idx]);
-            resultTime += CorHReq * amountEach[idx] * DIFFICULTY_TIME_MOD;
+            resultTime += CorHReq * amountEach[idx] * difficulty_time_mod;
         }
 
         if (resultTime == 0)
