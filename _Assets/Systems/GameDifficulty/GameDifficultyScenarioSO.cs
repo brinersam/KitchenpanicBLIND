@@ -7,7 +7,11 @@ public class GameDifficultyScenarioSO : ScriptableObject
 {
     public RecipeSO[] recipeArr;
     public int initialSeconds = 30;
-    [Range(0,100)] public int randomTickDish_pct = 3;
-    [Range(0,100)] public int generateRecipeWhenQueueFullAt_pct = 25;
+    [SerializeField] [Range(0,100)] private int randomTickDish = 3;
+    [SerializeField] [Range(0,100)] private int generateRecipeWhenQueueFullAt = 25;
     public float recipeCompletionPts_mod = 1.5f;
+
+
+    public double RandomTickDish_pct => randomTickDish * 0.01;
+    public double GenerateRecipeWhenQueueFullAt_pct => generateRecipeWhenQueueFullAt * 0.01;
 }

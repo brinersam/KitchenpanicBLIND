@@ -7,12 +7,12 @@ public class InvGUI : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer[] Icons;
 
-    public void UpdateVisuals(List<RecipeSO> recipeList)
-    {
-        // todo errors when nothing in queue
-        // make a separate class for system ui tbh
-        UpdateVisuals(recipeList[0].ingredients);
-    }
+    // public void UpdateVisuals(List<RecipeSO> recipeList)
+    // {
+    //     // todo errors when nothing in queue
+    //     // make a separate class for system ui tbh
+    //     UpdateVisuals(recipeList[0].ingredients);
+    // }
 
     public void UpdateVisuals(IEnumerable<ItemInfo> collection)
     {

@@ -35,10 +35,10 @@ public static class System_UI
         state.OnMenuBtn();
     }
 
-    public static void RefreshQueueUI()
-    {
-        state.RefreshQueue();
-    }
+    // public static void RefreshQueueUI()
+    // {
+    //     state.RefreshQueue();
+    // }
 
     // public static void SetStateTo(Abstract_UI newState) // i really shouldnt switch states like this i think
     // {

@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 6a660371318f1a144a49cb8461a91093
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - recipeBoxPrefab: {fileID: 6822718848965282182, guid: e91d7a28a6f687e4f9107e2fe1e64397, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

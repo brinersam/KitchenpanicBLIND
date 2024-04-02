@@ -5,13 +5,16 @@ using UnityEngine;
 
 public static class System_DishMgr
 {
-    public const int MAXIMUM_DISHES = 1;
+    public const int MAXIMUM_DISHES = 5;
 
-    public static event Action OnScenarioChange;
+    public static event Action<int> OnRecipeAdded;
+    public static event Action<int> OnRecipeRemoved;
+
+    public static event Action OnScenarioChange; // separate this into difficultySystem todo
     private static SystemsHelper helper = null;
-    private static GameDifficultyScenarioSO __scenario;
+    private static GameDifficultyScenarioSO __scenario; // separate this into difficultySystem todo
     private static List<RecipeSO> recipeQueue = new(MAXIMUM_DISHES);
-
+    
     public static SystemsHelper Helper 
     {   get => helper;
         set
@@ -54,7 +57,8 @@ public static class System_DishMgr
     public static void OnTick()
     {
         //update timer
-        if (recipeQueue.Count < MAXIMUM_DISHES && UnityEngine.Random.Range(0,100) < Scenario.randomTickDish_pct)
+        if (recipeQueue.Count < MAXIMUM_DISHES &&
+            UnityEngine.Random.Range(0,100) < Scenario.RandomTickDish_pct)
         {
             RequestNewDish();
         }
@@ -62,7 +66,7 @@ public static class System_DishMgr
 
     public static void OnTickEvent()
     {
-        if (recipeQueue.Count < MAXIMUM_DISHES && recipeQueue.Count < MAXIMUM_DISHES * Scenario.generateRecipeWhenQueueFullAt_pct)
+        if (recipeQueue.Count < MAXIMUM_DISHES * Scenario.GenerateRecipeWhenQueueFullAt_pct)
         {
             RequestNewDish();
         }
@@ -77,13 +81,13 @@ public static class System_DishMgr
         }
         recipeQueue.Add(Scenario.recipeArr[UnityEngine.Random.Range(0,Scenario.recipeArr.Length)]);
         Debug.Log($"Dishmgr: new recipe: {recipeQueue[0]}");
-        System_UI.RefreshQueueUI();
+        OnRecipeAdded?.Invoke(1);
     }
 
     private static void AcceptRecipe(RecipeSO recipe)
     {
         Debug.Log($"Success!! Player gets +{recipe.SecToPrepare} seconds!");
-        System_UI.RefreshQueueUI();
+        OnRecipeRemoved?.Invoke(0);
     }
 
     private static void DenyRecipe()
