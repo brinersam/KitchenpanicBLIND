@@ -103,7 +103,7 @@ public class Inventory : MonoBehaviour, IEnumerable<Item>, IEnumerable<ItemInfo>
     {
         if (!HasWhiteList) return true;
 
-        return _itemWhiteList.Contains(item.Info.type); // sometimes null item gets thorugh sometimes
+        return _itemWhiteList.Contains(item.Info.Type); // sometimes null item gets thorugh sometimes
     }
 
     public IEnumerator<Item> GetEnumerator()

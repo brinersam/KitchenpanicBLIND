@@ -1,3 +1,4 @@
 .gitattributes
 /TextMesh Pro/
-
+DOTween/*
+!DOTween/readme.txt

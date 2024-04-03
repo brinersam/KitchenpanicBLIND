@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeArr:
   - {fileID: 11400000, guid: 2bfe6754dfd48a448beb7c7340aa41bc, type: 2}
-  - {fileID: 11400000, guid: c3e2fcda0e5228d4f804c60ec37d3fe8, type: 2}
+  - {fileID: 11400000, guid: a2cbfc90c7ea28148ac2718a20c6577a, type: 2}
+  - {fileID: 11400000, guid: 162a94d78ff14db41bcd52e6252a9d46, type: 2}
   initialSeconds: 30
-  newDishRequestPerSecPct: 3
-  forceGenerateRecipeAtPct: 25
+  randomTickDish: 25
+  generateRecipeWhenQueueFullAt: 0
+  recipeCompletionPts_mod: 1.5

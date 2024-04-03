@@ -1,23 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class DishMgr_UI : MonoBehaviour
 {
-    private DishRequestBox[] recipeBoxes;
-    private int CurCapIdx = 0;
+    private DishRequestBox[] _recipeBoxes;
+    private int _lastIdx = 0;
     [SerializeField] private GameObject recipeBoxPrefab;
+    [SerializeField] private RecipeSO DEBUG_RECIPE;
 
     private void Awake()
     {
-        recipeBoxes = new DishRequestBox[System_DishMgr.MAXIMUM_DISHES];
-        for (int i = 0; i < recipeBoxes.Length; i++)
-        {
-            var go = Instantiate(recipeBoxPrefab);
-            go.transform.SetParent(transform,false);
-            go.SetActive(false);
-            recipeBoxes[i] = GetComponent<DishRequestBox>();
-        }
+        Init();
     }
 
     private void Start() 
@@ -26,45 +21,75 @@ public class DishMgr_UI : MonoBehaviour
         System_DishMgr.OnRecipeRemoved += Recipe_Remove;
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Debug.Log("adding a recipe");
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Debug.Log("removing a recipe in the middle");
-        }
-    }
-
-    private void Recipe_Add()
+    private void Recipe_Add(RecipeSO recipe)
     {
-        Recipe_Add(CurCapIdx);
-    }
-
-    private void Recipe_Add(int idx)
-    {
-        if (idx >= recipeBoxes.Length)
+        if (_lastIdx >= _recipeBoxes.Length)
         {
             Debug.LogWarning("Recipe list overflow prevented");
             return;
         }
 
-        Debug.Log("recipe add"); //todo
+        _recipeBoxes[_lastIdx].gameObject.SetActive(true);
+        _recipeBoxes[_lastIdx].UpdateVisuals(recipe);
 
-        CurCapIdx++;
+        _lastIdx++;
     }
 
-    private void Recipe_Remove(int idx)
+    private void Recipe_Remove(RecipeSO recipe)
     {
-        if (CurCapIdx - 1 < 0)
+        if (_lastIdx - 1 < 0)
         {
-            Debug.LogWarning("Recipe list underflow prevented");
+            Debug.LogWarning("Removal from empty recipe list prevented");
             return;
         }
 
-        Debug.Log("recipe remove"); //todo
+        int j;
+        for (j = 0; j < _recipeBoxes.Length; j++)
+        {
+            if (_recipeBoxes[j].LastData == recipe)
+                break;
+        }
 
-        CurCapIdx--;
+
+        for (int i = j; i < -1 + _recipeBoxes.Length; i++)
+        {
+            if (_recipeBoxes[i].gameObject.activeInHierarchy == false)
+                break;
+
+            _recipeBoxes[i].UpdateVisuals(_recipeBoxes[i+1]);
+            Animate_ShuffleUp(i);
+        }
+
+        _lastIdx--;
+        _recipeBoxes[_lastIdx].gameObject.SetActive(false);
+    }
+
+    private void Animate_ShuffleUp(int idx)
+    {
+        Vector3 posOrig;
+        Vector3 posOffset;
+
+        posOrig = posOffset =  _recipeBoxes[idx].transform.position;
+        
+        posOffset.y -= 0.15f; // for some reason fucks with other 2
+        posOffset.x = posOrig.x; 
+        posOffset.z = posOrig.z;
+
+        _recipeBoxes[idx].transform.position = posOffset;
+
+        _recipeBoxes[idx].transform.DOShakePosition(0.2f);
+        _recipeBoxes[idx].transform.DOMove(posOrig,0.2f);
+    }
+
+    private void Init()
+    {
+        _recipeBoxes = new DishRequestBox[System_DishMgr.MAXIMUM_DISHES];
+        for (int i = 0; i < _recipeBoxes.Length; i++)
+        {
+            var gObj = Instantiate(recipeBoxPrefab);
+            gObj.transform.SetParent(transform,false);
+            gObj.SetActive(false);
+            _recipeBoxes[i] = gObj.GetComponent<DishRequestBox>();
+        }
     }
 }

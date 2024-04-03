@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 44dc72d68759efe45a2ba18ad09d6da3, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -5576,6 +5576,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayUI
       objectReference: {fileID: 0}
+    - target: {fileID: 192061785497229760, guid: fd64c49ac69d7684e85c48ad79ab1d3e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758844114368974222, guid: fd64c49ac69d7684e85c48ad79ab1d3e, type: 3}
+      propertyPath: DEBUG_RECIPE
+      value: 
+      objectReference: {fileID: 11400000, guid: 2bfe6754dfd48a448beb7c7340aa41bc, type: 2}
     - target: {fileID: 7796380735907952271, guid: fd64c49ac69d7684e85c48ad79ab1d3e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

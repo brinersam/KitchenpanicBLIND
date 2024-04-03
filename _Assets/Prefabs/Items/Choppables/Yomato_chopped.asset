@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Yomato_chopped
   m_EditorClassIdentifier: 
   visualObj: {fileID: 5104525435605647352, guid: 17eb80dd705034c478d26d7db671c1be, type: 3}
-  icon: {fileID: 21300000, guid: c9f08c3c1ae2a364aaeaa3712540b1d4, type: 3}
+  sprite: {fileID: 21300000, guid: c9f08c3c1ae2a364aaeaa3712540b1d4, type: 3}
   type: 1
   prepareMethod: 0
   prepareResult: {fileID: 0}
+  ChopsOrHeatsRequired: 6
+  invCapacity: 0
+  uiObj: {fileID: 0}

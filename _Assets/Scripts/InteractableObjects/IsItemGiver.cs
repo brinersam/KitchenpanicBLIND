@@ -19,7 +19,7 @@ public class IsItemGiver : MonoBehaviour, IInteractable
         }
         
         if (applyIconTo != null)
-            applyIconTo.sprite = itemToGive.icon;
+            applyIconTo.sprite = itemToGive.Sprite;
     }
     public void Interact(MonoBehaviour caller, bool alt)
     {

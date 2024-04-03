@@ -9,7 +9,7 @@ public class SystemsHelper : MonoBehaviour
     [SerializeField] private GameDifficultyScenarioSO initialScenario;
 
     [Header("Dish request system")]
-    const int MAX_RECIPES_IN_QUEUE = 5;
+    public const int MAX_RECIPES_IN_QUEUE = 5;
 
     [Header("Ui system")]
     public UI_freshlaunch UI_freshLaunchObj;

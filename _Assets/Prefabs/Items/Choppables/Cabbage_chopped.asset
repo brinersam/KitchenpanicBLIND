@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Cabbage_chopped
   m_EditorClassIdentifier: 
   visualObj: {fileID: 4973929360063704120, guid: e95c688f005cdb14dae104614cfd8d68, type: 3}
-  icon: {fileID: 21300000, guid: bee24f07c57157e45a946eed3bfe8b84, type: 3}
+  sprite: {fileID: 21300000, guid: bee24f07c57157e45a946eed3bfe8b84, type: 3}
   type: 1
   prepareMethod: 0
   prepareResult: {fileID: 0}
+  ChopsOrHeatsRequired: 6
+  invCapacity: 0
+  uiObj: {fileID: 0}

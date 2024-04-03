@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Cheese_raw
   m_EditorClassIdentifier: 
   visualObj: {fileID: 8731024045870147925, guid: 54a8f310ae9e7954380feff7fb903494, type: 3}
-  icon: {fileID: 21300000, guid: da2d04fe27b94e34ea0b624569b48a6f, type: 3}
+  sprite: {fileID: 21300000, guid: da2d04fe27b94e34ea0b624569b48a6f, type: 3}
   type: 6
   prepareMethod: 2
   prepareResult: {fileID: 11400000, guid: 072e772a633c19741b9eb2ebc446bca8, type: 2}
   ChopsOrHeatsRequired: 10
+  invCapacity: 0
+  uiObj: {fileID: 0}

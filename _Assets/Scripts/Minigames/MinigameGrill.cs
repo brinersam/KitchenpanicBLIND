@@ -49,7 +49,7 @@ public class MinigameWait : MinigameBase // change this to minigame_wait for mod
             float pct = 1 - secsLeft/secsRequired;
             progressBar.Refresh(pct);
 
-            if (item.Info.prepareResult.type == ItemType.Ingredient_Trash)
+            if (item.Info.prepareResult.Type == ItemType.Ingredient_Trash)
             {
                 if (pct > 0.6)
                     progressBar.Warning_Pulse();

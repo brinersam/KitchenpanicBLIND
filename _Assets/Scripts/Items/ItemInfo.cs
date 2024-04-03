@@ -5,9 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ItemInfoSO", menuName = "SObjects/ItemBase" )]
 public class ItemInfo : ScriptableObject
 {
-    public GameObject visualObj;
-    public Sprite icon;
-    public ItemType type;
+    [SerializeField] private GameObject visualObj;
+    [SerializeField] private Sprite sprite;
+    [SerializeField] private ItemType type;
+
+    public GameObject VisualObj => visualObj;
+    public Sprite Sprite => sprite;
+    public ItemType Type => type;
 
     public Item SpawnItem()
     {

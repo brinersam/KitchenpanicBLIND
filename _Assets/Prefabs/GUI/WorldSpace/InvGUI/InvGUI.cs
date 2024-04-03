@@ -23,7 +23,7 @@ public class InvGUI : MonoBehaviour
             if (itemIEnum.MoveNext() && itemIEnum.Current != null)
             {
                 icon.transform.parent.gameObject.SetActive(true);
-                icon.sprite = itemIEnum.Current.icon;
+                icon.sprite = itemIEnum.Current.Sprite;
             }
             else
             {

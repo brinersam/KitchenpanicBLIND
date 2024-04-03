@@ -5,10 +5,10 @@ using UnityEngine;
 
 public static class System_DishMgr
 {
-    public const int MAXIMUM_DISHES = 5;
+    public static int MAXIMUM_DISHES = SystemsHelper.MAX_RECIPES_IN_QUEUE;
 
-    public static event Action<int> OnRecipeAdded;
-    public static event Action<int> OnRecipeRemoved;
+    public static event Action<RecipeSO> OnRecipeAdded;
+    public static event Action<RecipeSO> OnRecipeRemoved;
 
     public static event Action OnScenarioChange; // separate this into difficultySystem todo
     private static SystemsHelper helper = null;
@@ -58,8 +58,9 @@ public static class System_DishMgr
     {
         //update timer
         if (recipeQueue.Count < MAXIMUM_DISHES &&
-            UnityEngine.Random.Range(0,100) < Scenario.RandomTickDish_pct)
+            UnityEngine.Random.Range(0,100) * 0.01 < Scenario.RandomTickDish_pct)
         {
+            Debug.Log("EVENT DISH");
             RequestNewDish();
         }
     }
@@ -79,15 +80,18 @@ public static class System_DishMgr
             Debug.Log("Attempt at adding recipe while queue is full!");
             return;
         }
-        recipeQueue.Add(Scenario.recipeArr[UnityEngine.Random.Range(0,Scenario.recipeArr.Length)]);
-        Debug.Log($"Dishmgr: new recipe: {recipeQueue[0]}");
-        OnRecipeAdded?.Invoke(1);
+
+        RecipeSO randomRecipe = Scenario.recipeArr[UnityEngine.Random.Range(0,Scenario.recipeArr.Length)];
+
+        recipeQueue.Add(randomRecipe);
+        Debug.Log($"Dishmgr: new recipe: {randomRecipe}");
+        OnRecipeAdded?.Invoke(randomRecipe);
     }
 
     private static void AcceptRecipe(RecipeSO recipe)
     {
         Debug.Log($"Success!! Player gets +{recipe.SecToPrepare} seconds!");
-        OnRecipeRemoved?.Invoke(0);
+        OnRecipeRemoved?.Invoke(recipe);
     }
 
     private static void DenyRecipe()

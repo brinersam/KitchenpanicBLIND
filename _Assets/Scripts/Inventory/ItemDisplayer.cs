@@ -29,7 +29,7 @@ public class ItemDisplayer : MonoBehaviour
 
         foreach (var i in inv)
         {
-            var visual = Instantiate(i.Info.visualObj, parent:visualObj.transform);
+            var visual = Instantiate(i.Info.VisualObj, parent:visualObj.transform);
             visual.transform.localPosition += new Vector3(0,yoffset,0);
             yoffset += 0.1f;
 

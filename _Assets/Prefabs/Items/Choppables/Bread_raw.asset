@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Bread_raw
   m_EditorClassIdentifier: 
   visualObj: {fileID: 8253755870206601773, guid: 538d0c06302a971448e5237200c5ef51, type: 3}
-  icon: {fileID: 21300000, guid: 77b28124b8bda494381c80bd5aa42c22, type: 3}
+  sprite: {fileID: 21300000, guid: 77b28124b8bda494381c80bd5aa42c22, type: 3}
   type: 6
   prepareMethod: 2
   prepareResult: {fileID: 11400000, guid: 4836c75c437764d42a59a098413c69c3, type: 2}
   ChopsOrHeatsRequired: 6
+  invCapacity: 0
+  uiObj: {fileID: 0}
