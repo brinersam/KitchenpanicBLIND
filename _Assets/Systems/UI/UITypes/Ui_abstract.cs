@@ -29,6 +29,11 @@ public abstract class Abstract_UI : MonoBehaviour
         return;
     }
 
+    public virtual void OnTick()
+    {
+        return;
+    }
+    
     public virtual void SetStateTo(Abstract_UI newState)
     {
         uiGobj.SetActive(false);

@@ -2,3 +2,6 @@
 /TextMesh Pro/
 DOTween/*
 !DOTween/readme.txt
+
+Plugins/Zenject/*
+!Plugins/Zenject/ReadMe.url

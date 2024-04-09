@@ -1867,6 +1867,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2654400721409490678, guid: 63a6b5418e061284892d85f3c635199f, type: 3}
   m_PrefabInstance: {fileID: 456020409}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &545733764 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 639570868651531854, guid: fd64c49ac69d7684e85c48ad79ab1d3e, type: 3}
+  m_PrefabInstance: {fileID: 4187982360407580446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c56734cf601fc1e409e060e40f74ade9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &581801303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5580,6 +5591,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5758844114368974222, guid: fd64c49ac69d7684e85c48ad79ab1d3e, type: 3}
+      propertyPath: TimerUI
+      value: 
+      objectReference: {fileID: 545733764}
     - target: {fileID: 5758844114368974222, guid: fd64c49ac69d7684e85c48ad79ab1d3e, type: 3}
       propertyPath: DEBUG_RECIPE
       value: 

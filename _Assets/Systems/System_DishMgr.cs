@@ -1,38 +1,44 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class System_DishMgr
 {
-    public static int MAXIMUM_DISHES = SystemsHelper.MAX_RECIPES_IN_QUEUE;
+    private static int maximumDishes = SystemsHelper.MAX_RECIPES_IN_QUEUE;
 
+    private static readonly List<RecipeSO> recipeQueue = new(maximumDishes);
+    
+    private static SystemsHelper _helper = null;
+    public static SystemsHelper Helper 
+    {   
+        get => _helper;
+        set {SetHelper(value);}
+    }
+
+    public static List<RecipeSO> RecipeQueue => recipeQueue;
     public static event Action<RecipeSO> OnRecipeAdded;
     public static event Action<RecipeSO> OnRecipeRemoved;
+    public static int MaximumDishes => maximumDishes;
 
-    public static event Action OnScenarioChange; // separate this into difficultySystem todo
-    private static SystemsHelper helper = null;
-    private static GameDifficultyScenarioSO __scenario; // separate this into difficultySystem todo
-    private static List<RecipeSO> recipeQueue = new(MAXIMUM_DISHES);
+
+    public static void OnTick()
+    {
+        if (recipeQueue.Count < maximumDishes &&
+            UnityEngine.Random.Range(0,100) * 0.01 < System_Difficulty.Scenario.RandomTickDish_pct)
+        {
+            Debug.Log("EVENT DISH");
+            RequestNewDish();
+        }
+    }
+
+    public static void OnTickEvent()
+    {
+        if (recipeQueue.Count < maximumDishes * System_Difficulty.Scenario.GenerateRecipeWhenQueueFullAt_pct)
+        {
+            RequestNewDish();
+        }
+    }
     
-    public static SystemsHelper Helper 
-    {   get => helper;
-        set
-        {if (helper != null)
-            {   Debug.LogError("Interrupted attempt at second helper connecting to static @DishDeliverySystem",value.gameObject);
-                return;
-            }
-            helper = value;
-        }
-    }
-    public static GameDifficultyScenarioSO Scenario
-    {   get => __scenario;
-        set{OnScenarioChange?.Invoke();
-            __scenario = value;
-        }
-    }
-    public static List<RecipeSO> RecipeQueue => recipeQueue;
-
     public static bool TryAcceptDish(Item plate)
     {
         int plateHash = plate.GetHashCode();
@@ -54,34 +60,16 @@ public static class System_DishMgr
         return false;
     }
 
-    public static void OnTick()
-    {
-        //update timer
-        if (recipeQueue.Count < MAXIMUM_DISHES &&
-            UnityEngine.Random.Range(0,100) * 0.01 < Scenario.RandomTickDish_pct)
-        {
-            Debug.Log("EVENT DISH");
-            RequestNewDish();
-        }
-    }
-
-    public static void OnTickEvent()
-    {
-        if (recipeQueue.Count < MAXIMUM_DISHES * Scenario.GenerateRecipeWhenQueueFullAt_pct)
-        {
-            RequestNewDish();
-        }
-    }
         
     private static void RequestNewDish()
     {
-        if (recipeQueue.Count >= MAXIMUM_DISHES)
+        if (recipeQueue.Count >= maximumDishes)
         {
             Debug.Log("Attempt at adding recipe while queue is full!");
             return;
         }
 
-        RecipeSO randomRecipe = Scenario.recipeArr[UnityEngine.Random.Range(0,Scenario.recipeArr.Length)];
+        RecipeSO randomRecipe = System_Difficulty.Scenario.recipeArr[UnityEngine.Random.Range(0,System_Difficulty.Scenario.recipeArr.Length)];
 
         recipeQueue.Add(randomRecipe);
         Debug.Log($"Dishmgr: new recipe: {randomRecipe}");
@@ -97,5 +85,24 @@ public static class System_DishMgr
     private static void DenyRecipe()
     {
         Debug.Log($"UNACCEPTABLE!!");
+    }
+
+    private static void Bind()
+    {
+        System_Tick.OnTick += OnTick;
+        System_Tick.OnTickEvent += OnTick;
+    }
+
+    private static void SetHelper(SystemsHelper val)
+    {
+        if (_helper != null)
+        {   Debug.LogError("Interrupted attempt at second helper connecting to static @System_DishManager",val.gameObject);
+            return;
+        }
+        else
+        {
+            Bind();
+        }
+        _helper = val;
     }
 }

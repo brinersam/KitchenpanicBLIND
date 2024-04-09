@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,15 +6,20 @@ public class TimerElementUI : MonoBehaviour
     [SerializeField] [Range(0,1)] float fillPct = 1f;
     [SerializeField] Image fillCircle;
 
-    public float FillPct
+    private void Awake()
     {
-        get{return fillPct;}
-        set{fillPct = Mathf.Clamp(value,0,1);}
+        System_Tick.OnTick += OnTick;
     }
 
-    void FixedUpdate() 
+    public void SetVisual(float pct)
     {
-        fillCircle.fillAmount = fillPct;    
+        fillPct = Mathf.Clamp(pct,0,1);
     }
+
+    private void OnTick()
+    {
+        fillCircle.fillAmount = fillPct;
+    }
+
 
 }

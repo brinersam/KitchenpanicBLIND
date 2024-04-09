@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -8,7 +6,7 @@ public class DishMgr_UI : MonoBehaviour
     private DishRequestBox[] _recipeBoxes;
     private int _lastIdx = 0;
     [SerializeField] private GameObject recipeBoxPrefab;
-    [SerializeField] private RecipeSO DEBUG_RECIPE;
+    [SerializeField] private TimerElementUI TimerUI;
 
     private void Awake()
     {
@@ -19,6 +17,12 @@ public class DishMgr_UI : MonoBehaviour
     {
         System_DishMgr.OnRecipeAdded += Recipe_Add;
         System_DishMgr.OnRecipeRemoved += Recipe_Remove;
+        System_Tick.OnTick += UpdateClockVisual;
+    }
+
+    public void UpdateClockVisual()
+    {
+        TimerUI.FillPct
     }
 
     private void Recipe_Add(RecipeSO recipe)
@@ -49,7 +53,6 @@ public class DishMgr_UI : MonoBehaviour
             if (_recipeBoxes[j].LastData == recipe)
                 break;
         }
-
 
         for (int i = j; i < -1 + _recipeBoxes.Length; i++)
         {
@@ -83,7 +86,7 @@ public class DishMgr_UI : MonoBehaviour
 
     private void Init()
     {
-        _recipeBoxes = new DishRequestBox[System_DishMgr.MAXIMUM_DISHES];
+        _recipeBoxes = new DishRequestBox[System_DishMgr.MaximumDishes];
         for (int i = 0; i < _recipeBoxes.Length; i++)
         {
             var gObj = Instantiate(recipeBoxPrefab);

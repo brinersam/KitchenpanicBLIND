@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SystemsHelper : MonoBehaviour
 {
-    [Header("Game Scenario")]
+    [Header("Game Difficulty")]
     [SerializeField] private GameDifficultyScenarioSO initialScenario;
 
     [Header("Dish request system")]
@@ -17,13 +17,9 @@ public class SystemsHelper : MonoBehaviour
     public UI_pausemenu UI_pauseMenuObj;
     public UI_gameover UI_gameoverObj;
 
-    [Header("Tick system")]
-    [SerializeField] float triggerEventAtEachnthTick = 4f;
-    private float curTick = 0;
-    private float eventTick = 0;
-
     void Awake()
     {
+        System_Tick.Helper = this;
         System_DishMgr.Helper = this;
         System_UI.Helper = this;
     }
@@ -33,23 +29,11 @@ public class SystemsHelper : MonoBehaviour
         if (initialScenario == null)
             Debug.LogError("No scenario set! No recipes will be generated", this);
         else
-            System_DishMgr.Scenario = initialScenario;
+            System_Difficulty.Scenario = initialScenario;
     }
 
-    void FixedUpdate() 
+    void FixedUpdate()
     {
-        curTick += 1 * Time.deltaTime;
-        if (curTick >= 1) // 1 tick per second
-        {
-            System_DishMgr.OnTick();
-            curTick -= 1;
-            eventTick += 1;
-        }
-
-        if (eventTick >= triggerEventAtEachnthTick)
-        {
-            System_DishMgr.OnTickEvent();
-            eventTick -= triggerEventAtEachnthTick;
-        }
+        System_Tick.FixedUpdate();
     }
 }

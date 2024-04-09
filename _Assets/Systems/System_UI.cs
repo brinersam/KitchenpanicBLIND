@@ -28,22 +28,13 @@ public static class System_UI
     {
         System_Pauser.OnPause += OnPause;
         System_Pauser.OnUnPause += OnUnPause;
+        System_Tick.OnTick += OnTick;
     }
 
     public static void OnMenuBtn()
     {
         state.OnMenuBtn();
     }
-
-    // public static void RefreshQueueUI()
-    // {
-    //     state.RefreshQueue();
-    // }
-
-    // public static void SetStateTo(Abstract_UI newState) // i really shouldnt switch states like this i think
-    // {
-    //     state.SetStateTo(newState);
-    // }
 
     private static void OnPause()
     {
@@ -53,6 +44,11 @@ public static class System_UI
     private static void OnUnPause()
     {
         state.OnUnPause();
+    }
+
+    private static void OnTick()
+    {
+        state.OnTick();
     }
 
     private static void InitializeStates()
