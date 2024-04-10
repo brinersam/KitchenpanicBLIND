@@ -22,6 +22,7 @@ public class SystemsHelper : MonoBehaviour
         System_Tick.Helper = this;
         System_DishMgr.Helper = this;
         System_UI.Helper = this;
+        System_Session.Helper = this;
     }
 
     void Start() 
@@ -29,7 +30,7 @@ public class SystemsHelper : MonoBehaviour
         if (initialScenario == null)
             Debug.LogError("No scenario set! No recipes will be generated", this);
         else
-            System_Difficulty.Scenario = initialScenario;
+            System_Session.Scenario = initialScenario;
     }
 
     void FixedUpdate()

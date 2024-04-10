@@ -1,12 +1,12 @@
 using UnityEngine;
 public abstract class Abstract_UI : MonoBehaviour
 {
-    [SerializeField] protected GameObject uiGobj;
-    public GameObject UiGObj => uiGobj;
+    //[SerializeField] protected GameObject _uiGobj;
+    //public GameObject UiGObj => _uiGobj;
 
     public virtual void Activate()
     {
-        uiGobj.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     public virtual void OnMenuBtn()
@@ -23,20 +23,19 @@ public abstract class Abstract_UI : MonoBehaviour
     {
         return;
     }
+    public virtual void OnGameOver()
+    {
+        return;
+    }
 
     public virtual void RefreshQueue()
     {
         return;
     }
 
-    public virtual void OnTick()
-    {
-        return;
-    }
-    
     public virtual void SetStateTo(Abstract_UI newState)
     {
-        uiGobj.SetActive(false);
+        gameObject.SetActive(false);
         System_UI.state = newState;
         System_UI.state.Activate();
     }

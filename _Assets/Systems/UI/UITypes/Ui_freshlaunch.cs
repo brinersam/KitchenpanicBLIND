@@ -3,7 +3,7 @@ public class UI_freshlaunch : Abstract_UI
 {
     public override void Activate()
     {
-        uiGobj.SetActive(true);
+        gameObject.SetActive(true);
         System_Pauser.Pause_On();
     }
     public override void OnMenuBtn()

@@ -4,37 +4,37 @@ using UnityEngine;
 
 public static class System_DishMgr
 {
-    private static int maximumDishes = SystemsHelper.MAX_RECIPES_IN_QUEUE;
+    private static int _maximumDishes = SystemsHelper.MAX_RECIPES_IN_QUEUE;
 
-    private static readonly List<RecipeSO> recipeQueue = new(maximumDishes);
+    private static readonly List<RecipeSO> _recipeQueue = new(_maximumDishes);
     
     private static SystemsHelper _helper = null;
     public static SystemsHelper Helper 
     {   
         get => _helper;
-        set {SetHelper(value);}
+        set {Initialze(value);}
     }
 
-    public static List<RecipeSO> RecipeQueue => recipeQueue;
+    public static List<RecipeSO> RecipeQueue => _recipeQueue;
     public static event Action<RecipeSO> OnRecipeAdded;
     public static event Action<RecipeSO> OnRecipeRemoved;
-    public static int MaximumDishes => maximumDishes;
+    public static int MaximumDishes => _maximumDishes;
 
 
     public static void OnTick()
     {
-        if (recipeQueue.Count < maximumDishes &&
-            UnityEngine.Random.Range(0,100) * 0.01 < System_Difficulty.Scenario.RandomTickDish_pct)
+        if (_recipeQueue.Count < _maximumDishes * System_Session.Scenario.ForceRecipeAtLessThan_pct)
         {
-            Debug.Log("EVENT DISH");
             RequestNewDish();
         }
     }
 
     public static void OnTickEvent()
     {
-        if (recipeQueue.Count < maximumDishes * System_Difficulty.Scenario.GenerateRecipeWhenQueueFullAt_pct)
+        if (_recipeQueue.Count < _maximumDishes &&
+            UnityEngine.Random.Range(0,100) * 0.01 < System_Session.Scenario.RandomTickDish_pct)
         {
+            Debug.Log("RANDOM DISH");
             RequestNewDish();
         }
     }
@@ -44,13 +44,13 @@ public static class System_DishMgr
         int plateHash = plate.GetHashCode();
 
         Debug.Log($"Comparing hash of dish on the plate {plateHash} to:");
-        for (int idx = 0; idx < recipeQueue.Count; idx++)
+        for (int idx = 0; idx < _recipeQueue.Count; idx++)
         {
-            Debug.Log($"            Recipe : {recipeQueue[idx].recipeName}; Hash: {recipeQueue[idx].GetHashCode()}");
-            if (plateHash == recipeQueue[idx].GetHashCode())
+            Debug.Log($"            Recipe : {_recipeQueue[idx].recipeName}; Hash: {_recipeQueue[idx].GetHashCode()}");
+            if (plateHash == _recipeQueue[idx].GetHashCode())
             {
-                var temp = recipeQueue[idx];
-                recipeQueue.RemoveAt(idx);
+                var temp = _recipeQueue[idx];
+                _recipeQueue.RemoveAt(idx);
                 AcceptRecipe(temp);
                 return true;
             }
@@ -63,15 +63,15 @@ public static class System_DishMgr
         
     private static void RequestNewDish()
     {
-        if (recipeQueue.Count >= maximumDishes)
+        if (_recipeQueue.Count >= _maximumDishes)
         {
             Debug.Log("Attempt at adding recipe while queue is full!");
             return;
         }
 
-        RecipeSO randomRecipe = System_Difficulty.Scenario.recipeArr[UnityEngine.Random.Range(0,System_Difficulty.Scenario.recipeArr.Length)];
+        RecipeSO randomRecipe = System_Session.Scenario.recipeArr[UnityEngine.Random.Range(0,System_Session.Scenario.recipeArr.Length)];
 
-        recipeQueue.Add(randomRecipe);
+        _recipeQueue.Add(randomRecipe);
         Debug.Log($"Dishmgr: new recipe: {randomRecipe}");
         OnRecipeAdded?.Invoke(randomRecipe);
     }
@@ -79,6 +79,7 @@ public static class System_DishMgr
     private static void AcceptRecipe(RecipeSO recipe)
     {
         Debug.Log($"Success!! Player gets +{recipe.SecToPrepare} seconds!");
+        System_Session.TimeCur += recipe.SecToPrepare;
         OnRecipeRemoved?.Invoke(recipe);
     }
 
@@ -93,16 +94,14 @@ public static class System_DishMgr
         System_Tick.OnTickEvent += OnTick;
     }
 
-    private static void SetHelper(SystemsHelper val)
+    private static void Initialze(SystemsHelper val)
     {
         if (_helper != null)
         {   Debug.LogError("Interrupted attempt at second helper connecting to static @System_DishManager",val.gameObject);
             return;
         }
-        else
-        {
-            Bind();
-        }
+
+        Bind();
         _helper = val;
     }
 }

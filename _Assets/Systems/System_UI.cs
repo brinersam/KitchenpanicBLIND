@@ -28,7 +28,7 @@ public static class System_UI
     {
         System_Pauser.OnPause += OnPause;
         System_Pauser.OnUnPause += OnUnPause;
-        System_Tick.OnTick += OnTick;
+        System_Session.OnGameOver += OnGameOver; 
     }
 
     public static void OnMenuBtn()
@@ -46,9 +46,9 @@ public static class System_UI
         state.OnUnPause();
     }
 
-    private static void OnTick()
+    private static void OnGameOver()
     {
-        state.OnTick();
+        state.OnGameOver();
     }
 
     private static void InitializeStates()

@@ -22,7 +22,7 @@ public class DishMgr_UI : MonoBehaviour
 
     public void UpdateClockVisual()
     {
-        TimerUI.FillPct
+        TimerUI.SetVisual((float)System_Session.TimeCur/System_Session.TimeMax);
     }
 
     private void Recipe_Add(RecipeSO recipe)

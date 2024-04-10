@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2bfe6754dfd48a448beb7c7340aa41bc, type: 2}
   - {fileID: 11400000, guid: a2cbfc90c7ea28148ac2718a20c6577a, type: 2}
   - {fileID: 11400000, guid: 162a94d78ff14db41bcd52e6252a9d46, type: 2}
-  initialSeconds: 30
-  randomTickDish: 6
-  generateRecipeWhenQueueFullAt: 15
-  recipeCompletionPts_mod: 1.5
+  initialSeconds: 50
+  randomTickDish: 42
+  _forceRecipeAtLessThan: 25
+  recipeCompletionPts_mod: 2

@@ -24,7 +24,6 @@ public static class System_Tick
         }
     }
 
-
     public static void FixedUpdate() 
     {
         curTick += 1 * Time.deltaTime;
@@ -42,6 +41,4 @@ public static class System_Tick
             eventTick -= triggerEventAtEachnthTick;
         }
     }
-
-
 }
