@@ -14,6 +14,7 @@ public class ButtonManager : MonoBehaviour
 
     [Header("Change menu")]
     [SerializeField] Button SettingsBTN = null;
+    [SerializeField] MonoBehaviour IButton_SettingsBTNscript = null;
 
 
     [Header("Gameplay related")]
@@ -28,7 +29,7 @@ public class ButtonManager : MonoBehaviour
         ConfigureButton(LoadGameplaySceneBTN, ()=>Loader.LoadScene(Loader.ScenesEnum.Gameplay));
         ConfigureButton(LoadMainMenuSceneBTN, ()=>Loader.LoadScene(Loader.ScenesEnum.MainMenu));
         
-        ConfigureButton(SettingsBTN);
+        ConfigureButton(SettingsBTN, (IButton_SettingsBTNscript as IButton).OnClick);
 
         ConfigureButton(UnpauseBTN, ()=>System_Pauser.Pause_Off());
 
@@ -41,5 +42,4 @@ public class ButtonManager : MonoBehaviour
         
         btn.onClick.AddListener(fun);
     }
-
 }

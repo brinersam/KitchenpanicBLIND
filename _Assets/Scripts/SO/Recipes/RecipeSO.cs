@@ -38,12 +38,6 @@ public class RecipeSO : ScriptableObject
             RecalculateHash();
     }
 
-    // void OnScenarioChange()
-    // {
-    //     difficulty_time_mod = System_DishMgr.Scenario.recipeCompletionPts_mod;
-    //     CalculateTime();
-    // }
-
     public override int GetHashCode()
     {
         return hash;

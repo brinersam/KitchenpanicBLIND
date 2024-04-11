@@ -37,7 +37,7 @@ public static class System_Session
 
     private static void OnScenarioSet()
     {
-        TimeCur = Scenario.initialSeconds;
+        TimeCur = Scenario.InitialSeconds;
     }
 
     private static void OnTick()

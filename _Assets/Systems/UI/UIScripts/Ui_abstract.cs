@@ -4,7 +4,7 @@ public abstract class Abstract_UI : MonoBehaviour
     //[SerializeField] protected GameObject _uiGobj;
     //public GameObject UiGObj => _uiGobj;
 
-    public virtual void Activate()
+    public virtual void Activate(Abstract_UI prevstate = null)
     {
         gameObject.SetActive(true);
     }
@@ -35,8 +35,9 @@ public abstract class Abstract_UI : MonoBehaviour
 
     public virtual void SetStateTo(Abstract_UI newState)
     {
+        var stateOldref = System_UI.state;
         gameObject.SetActive(false);
         System_UI.state = newState;
-        System_UI.state.Activate();
+        System_UI.state.Activate(stateOldref);
     }
 }

@@ -33,7 +33,8 @@ public class ItemDisplayer : MonoBehaviour
             visual.transform.localPosition += new Vector3(0,yoffset,0);
             yoffset += 0.1f;
 
-            if (i.Info.invCapacity > 0)
+            //if (i.Info.invCapacity > 0)
+            if (i.Inventory is null == false)
             {
                 if (drawDepth == 0 && i.Info.uiObj != null)
                 {

@@ -16,6 +16,7 @@ public class SystemsHelper : MonoBehaviour
     public UI_gameplay UI_gameplayObj;
     public UI_pausemenu UI_pauseMenuObj;
     public UI_gameover UI_gameoverObj;
+    public UI_settings UI_settingsObj;
 
     void Awake()
     {

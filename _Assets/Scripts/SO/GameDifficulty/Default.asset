@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c7558ae6c70504d88c7d4fd9d5fc86, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  recipeArr:
+  _recipeArr:
   - {fileID: 11400000, guid: 2bfe6754dfd48a448beb7c7340aa41bc, type: 2}
-  - {fileID: 11400000, guid: a2cbfc90c7ea28148ac2718a20c6577a, type: 2}
   - {fileID: 11400000, guid: 162a94d78ff14db41bcd52e6252a9d46, type: 2}
-  initialSeconds: 50
-  randomTickDish: 42
-  _forceRecipeAtLessThan: 25
-  recipeCompletionPts_mod: 2
+  - {fileID: 11400000, guid: a2cbfc90c7ea28148ac2718a20c6577a, type: 2}
+  _initialSeconds: 30
+  _randomTickDish: 3
+  _forceRecipeAt: 25
+  _pts_Mod: 2

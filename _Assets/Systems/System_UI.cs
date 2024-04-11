@@ -9,7 +9,7 @@ public static class System_UI
     {   get => __helper;
         set
         {if (__helper != null)
-            {   Debug.LogError("Interrupted attempt at second helper connecting to static @DishDeliverySystem",value.gameObject);
+            {   Debug.LogError("Interrupted attempt at second helper connecting to static @System_UI",value.gameObject);
                 return;
             }
             __helper = value;
@@ -22,6 +22,7 @@ public static class System_UI
     public static UI_gameplay state_gameplay;
     public static UI_pausemenu state_pauseMenu;
     public static UI_gameover state_gameover;
+    public static UI_settings state_settings;
     public static Abstract_UI state;
 
     static System_UI()
@@ -57,6 +58,7 @@ public static class System_UI
         state_gameplay = Helper.UI_gameplayObj;
         state_pauseMenu = Helper.UI_pauseMenuObj;
         state_gameover = Helper.UI_gameoverObj;
+        state_settings = Helper.UI_settingsObj;
         state = state_freshLaunch;
         state.Activate();
     }

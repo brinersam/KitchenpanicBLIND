@@ -9,21 +9,20 @@ public static class System_DishMgr
     private static readonly List<RecipeSO> _recipeQueue = new(_maximumDishes);
     
     private static SystemsHelper _helper = null;
-    public static SystemsHelper Helper 
-    {   
-        get => _helper;
-        set {Initialze(value);}
-    }
 
-    public static List<RecipeSO> RecipeQueue => _recipeQueue;
     public static event Action<RecipeSO> OnRecipeAdded;
     public static event Action<RecipeSO> OnRecipeRemoved;
     public static int MaximumDishes => _maximumDishes;
+    public static List<RecipeSO> RecipeQueue => _recipeQueue;
+    public static SystemsHelper Helper 
+    {   
+        get => _helper; set {InitialzeHelper(value);}
+    }
 
 
     public static void OnTick()
     {
-        if (_recipeQueue.Count < _maximumDishes * System_Session.Scenario.ForceRecipeAtLessThan_pct)
+        if (_recipeQueue.Count < _maximumDishes * System_Session.Scenario.ForceRecipeAt_pct)
         {
             RequestNewDish();
         }
@@ -69,7 +68,7 @@ public static class System_DishMgr
             return;
         }
 
-        RecipeSO randomRecipe = System_Session.Scenario.recipeArr[UnityEngine.Random.Range(0,System_Session.Scenario.recipeArr.Length)];
+        RecipeSO randomRecipe = System_Session.Scenario.RecipeArr[UnityEngine.Random.Range(0,System_Session.Scenario.RecipeArr.Length)];
 
         _recipeQueue.Add(randomRecipe);
         Debug.Log($"Dishmgr: new recipe: {randomRecipe}");
@@ -78,8 +77,9 @@ public static class System_DishMgr
 
     private static void AcceptRecipe(RecipeSO recipe)
     {
-        Debug.Log($"Success!! Player gets +{recipe.SecToPrepare} seconds!");
-        System_Session.TimeCur += recipe.SecToPrepare;
+        Debug.Log($"Success!! Player gets +{(int)(recipe.SecToPrepare * System_Session.Scenario.Pts_Mod)} seconds!");
+        
+        System_Session.TimeCur += (int)(recipe.SecToPrepare * System_Session.Scenario.Pts_Mod);
         OnRecipeRemoved?.Invoke(recipe);
     }
 
@@ -94,7 +94,7 @@ public static class System_DishMgr
         System_Tick.OnTickEvent += OnTick;
     }
 
-    private static void Initialze(SystemsHelper val)
+    private static void InitialzeHelper(SystemsHelper val)
     {
         if (_helper != null)
         {   Debug.LogError("Interrupted attempt at second helper connecting to static @System_DishManager",val.gameObject);
