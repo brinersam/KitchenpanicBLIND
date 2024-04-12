@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7796380735907952271
 RectTransform:
   m_ObjectHideFlags: 0
@@ -50,8 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6dfde11dc5c1d24088008c81c57400d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiGobj: {fileID: 192061785497229760}
-  UI: {fileID: 5758844114368974222}
+  _UIScript: {fileID: 5758844114368974222}
 --- !u!1 &4084576130042467720
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipeBoxPrefab: {fileID: 6822718848965282182, guid: e91d7a28a6f687e4f9107e2fe1e64397, type: 3}
+  TimerUI: {fileID: 639570868651531854}
 --- !u!1001 &5507817234603313308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -237,6 +237,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 634e7a00b072e6444a726600235fdf2c, type: 3}
+--- !u!114 &639570868651531854 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4940313305926833874, guid: 634e7a00b072e6444a726600235fdf2c, type: 3}
+  m_PrefabInstance: {fileID: 5507817234603313308}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c56734cf601fc1e409e060e40f74ade9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7757990144639178450 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2866075489758158414, guid: 634e7a00b072e6444a726600235fdf2c, type: 3}

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SystemsHelper : MonoBehaviour
 {
@@ -18,12 +19,16 @@ public class SystemsHelper : MonoBehaviour
     public UI_gameover UI_gameoverObj;
     public UI_settings UI_settingsObj;
 
+    [Header("Input system")]
+    public InputActionAsset InputActionAsset;
+
     void Awake()
     {
         System_Tick.Helper = this;
         System_DishMgr.Helper = this;
         System_UI.Helper = this;
         System_Session.Helper = this;
+        System_InputSystemLocator.Helper = this;
     }
 
     void Start() 

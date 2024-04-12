@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour//, InputSystem.IGameplayActions
     {
         cursor= GetComponent<PlayerCursor>();
         animator= GetComponent<Animator>();
-        playerControls = new InputSystem();
+        playerControls = System_InputSystemLocator.InputSystem;
         playerControls.Gameplay.Enable();
     }
 

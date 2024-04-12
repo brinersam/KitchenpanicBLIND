@@ -183,13 +183,14 @@ GameObject:
   - component: {fileID: 2643046196429956015}
   - component: {fileID: 3388598083265899005}
   - component: {fileID: 1714667220307195934}
+  - component: {fileID: 702554515668015670}
   m_Layer: 5
   m_Name: PauseUi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2643046196429956015
 RectTransform:
   m_ObjectHideFlags: 0
@@ -229,6 +230,7 @@ MonoBehaviour:
   LoadGameplaySceneBTN: {fileID: 0}
   LoadMainMenuSceneBTN: {fileID: 6681879701002951542}
   SettingsBTN: {fileID: 7835361694763316178}
+  IButton_SettingsBTNscript: {fileID: 702554515668015670}
   UnpauseBTN: {fileID: 4576449674786171644}
   QuitBTN: {fileID: 0}
 --- !u!114 &1714667220307195934
@@ -243,7 +245,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462d3bb972d14354db9a79ce93778568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiGobj: {fileID: 7564272742612443246}
+--- !u!114 &702554515668015670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7564272742612443246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7482114d423326443b916d9b35317538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9089223404170383154
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +545,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 101.11
       objectReference: {fileID: 0}
+    - target: {fileID: 6376915992060722304, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8775447269640338295, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
       propertyPath: m_Name
       value: ButtonQuit
@@ -663,6 +680,10 @@ PrefabInstance:
     - target: {fileID: 4987435624687470454, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
       propertyPath: m_text
       value: OPTIONS
+      objectReference: {fileID: 0}
+    - target: {fileID: 6376915992060722304, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8775447269640338295, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
       propertyPath: m_Name
@@ -828,6 +849,10 @@ PrefabInstance:
     - target: {fileID: 4987435624687470454, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
       propertyPath: m_text
       value: RESUME
+      objectReference: {fileID: 0}
+    - target: {fileID: 6376915992060722304, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8775447269640338295, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
       propertyPath: m_Name

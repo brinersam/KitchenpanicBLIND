@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393184701487adb448b12b96d817ca0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buttonContainer: {fileID: 3804869317927182149}
   _backButton: {fileID: 8028894969912669668}
 --- !u!1 &3198480538791822703
 GameObject:
@@ -363,6 +364,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: binding_button (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7526188965768595167, guid: 679a1f0106f5c0741afe81930e9045dd, type: 3}
+      propertyPath: m_text
+      value: S
+      objectReference: {fileID: 0}
     - target: {fileID: 8654635956884847841, guid: 679a1f0106f5c0741afe81930e9045dd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -472,6 +477,10 @@ PrefabInstance:
     - target: {fileID: 5065532215860337955, guid: 679a1f0106f5c0741afe81930e9045dd, type: 3}
       propertyPath: m_Name
       value: binding_button (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526188965768595167, guid: 679a1f0106f5c0741afe81930e9045dd, type: 3}
+      propertyPath: m_text
+      value: D
       objectReference: {fileID: 0}
     - target: {fileID: 8654635956884847841, guid: 679a1f0106f5c0741afe81930e9045dd, type: 3}
       propertyPath: m_Pivot.x
@@ -681,6 +690,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3804869317927182149}
     m_Modifications:
+    - target: {fileID: 1965404203732497554, guid: 5fcb4cd84d425f34f863297d74b2d504, type: 3}
+      propertyPath: _type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965404203732497554, guid: 5fcb4cd84d425f34f863297d74b2d504, type: 3}
+      propertyPath: _controlType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5615850351171127683, guid: 5fcb4cd84d425f34f863297d74b2d504, type: 3}
       propertyPath: m_text
       value: Move
@@ -1046,6 +1063,10 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6376915992060722304, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8775447269640338295, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
       propertyPath: m_Name
       value: button_music
@@ -1068,6 +1089,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3804869317927182149}
     m_Modifications:
+    - target: {fileID: 1965404203732497554, guid: 5fcb4cd84d425f34f863297d74b2d504, type: 3}
+      propertyPath: _type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965404203732497554, guid: 5fcb4cd84d425f34f863297d74b2d504, type: 3}
+      propertyPath: _controlType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5615850351171127683, guid: 5fcb4cd84d425f34f863297d74b2d504, type: 3}
       propertyPath: m_text
       value: Alt
@@ -1194,6 +1223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: binding_button (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7526188965768595167, guid: 679a1f0106f5c0741afe81930e9045dd, type: 3}
+      propertyPath: m_text
+      value: A
+      objectReference: {fileID: 0}
     - target: {fileID: 8654635956884847841, guid: 679a1f0106f5c0741afe81930e9045dd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1292,6 +1325,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3804869317927182149}
     m_Modifications:
+    - target: {fileID: 1965404203732497554, guid: 5fcb4cd84d425f34f863297d74b2d504, type: 3}
+      propertyPath: _type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965404203732497554, guid: 5fcb4cd84d425f34f863297d74b2d504, type: 3}
+      propertyPath: _controlType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5615850351171127683, guid: 5fcb4cd84d425f34f863297d74b2d504, type: 3}
       propertyPath: m_text
       value: Pause
@@ -1514,6 +1555,10 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6376915992060722304, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8775447269640338295, guid: 046b8b1aef97de24d8e99670ba9b8975, type: 3}
       propertyPath: m_Name
       value: button_back
@@ -1547,6 +1592,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3804869317927182149}
     m_Modifications:
+    - target: {fileID: 1965404203732497554, guid: 5fcb4cd84d425f34f863297d74b2d504, type: 3}
+      propertyPath: _type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965404203732497554, guid: 5fcb4cd84d425f34f863297d74b2d504, type: 3}
+      propertyPath: _controlType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5615850351171127683, guid: 5fcb4cd84d425f34f863297d74b2d504, type: 3}
       propertyPath: m_text
       value: Interact
@@ -1782,6 +1835,10 @@ PrefabInstance:
     - target: {fileID: 5065532215860337955, guid: 679a1f0106f5c0741afe81930e9045dd, type: 3}
       propertyPath: m_Name
       value: binding_button
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526188965768595167, guid: 679a1f0106f5c0741afe81930e9045dd, type: 3}
+      propertyPath: m_text
+      value: W
       objectReference: {fileID: 0}
     - target: {fileID: 8654635956884847841, guid: 679a1f0106f5c0741afe81930e9045dd, type: 3}
       propertyPath: m_Pivot.x
