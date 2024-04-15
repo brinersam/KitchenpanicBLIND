@@ -10,20 +10,23 @@ public class PlayerController : MonoBehaviour//, InputSystem.IGameplayActions
     [SerializeField] private float Ms = 4.5f;
 
     private PlayerCursor cursor;
-    private InputSystem playerControls;
     private Animator animator;
 
     void Awake()
     {
         cursor= GetComponent<PlayerCursor>();
         animator= GetComponent<Animator>();
-        playerControls = System_InputSystemLocator.InputSystem;
-        playerControls.Gameplay.Enable();
+        System_InputSystemLocator.InputSystem.Gameplay.Enable();
     }
 
     private void Update()
     {
-        var temp = playerControls.Gameplay.Movement.ReadValue<Vector2>();
+        Move();
+    }
+
+    private void Move()
+    {
+        var temp = System_InputSystemLocator.InputSystem.Gameplay.Movement.ReadValue<Vector2>();
         var mvmnt = new Vector3(temp.x,0,temp.y);
 
         animator.SetBool("IsWalking",mvmnt != Vector3.zero);

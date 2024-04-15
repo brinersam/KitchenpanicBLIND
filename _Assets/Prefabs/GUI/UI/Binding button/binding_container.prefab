@@ -113,6 +113,8 @@ MonoBehaviour:
   bindingText: {fileID: 5615850351171127683}
   buttonPrefab: {fileID: 5065532215860337955, guid: 679a1f0106f5c0741afe81930e9045dd, type: 3}
   buttonContainer: {fileID: 407363430248740160}
+  _controlType: 0
+  _buttons: []
 --- !u!1 &8780938915859627441
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +149,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -50.9, y: 0}
+  m_AnchoredPosition: {x: 31.1, y: 0}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5012610183153285521

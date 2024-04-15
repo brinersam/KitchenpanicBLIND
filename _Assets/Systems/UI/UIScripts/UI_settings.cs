@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Custom.InputSystemTools;
 
 public class UI_settings : Abstract_UI
 {
@@ -21,7 +21,7 @@ public class UI_settings : Abstract_UI
         Initialize();
     }
 
-    private void OnButton()
+    private void OnBackButton()
     {
         System_UI.state.SetStateTo(_prevState);
     }
@@ -29,24 +29,26 @@ public class UI_settings : Abstract_UI
     private void Initialize()
     {
         if (_isInitialized) return;
-        _isInitialized = true;
+            _isInitialized = true;
 
-        _backButton.onClick.AddListener(OnButton);
+        _backButton.onClick.AddListener(OnBackButton);
         FillButtonSetDict();
 
-        using IEnumerator<InputBinding> enum_i_InputBinding = System_InputSystemLocator.InputSystem.Gameplay.Movement.bindings.GetEnumerator();
-        using IEnumerator<BindingButton> enum_j_Buttons = _buttonsSet[ControlGroupsEnum.Movement].GetEnumerator();
-
-        enum_i_InputBinding.MoveNext(); // skips first glue "composite" bind straight to separte subcomposite binds
-
-        while (enum_i_InputBinding.MoveNext() && enum_j_Buttons.MoveNext())
-        {
-            InputBinding i = enum_i_InputBinding.Current;
-            BindingButton j = enum_j_Buttons.Current;
-            j.Initialize(i);
-            Debug.Log($"{i.name}",j.gameObject);
-            //j.Initialize()
-        }
+        // BindControlGroup(
+        //     System_InputSystemLocator.InputSystem.Gameplay.Movement.bindings.GetEnumerator(),
+        //     _buttonsSet[ControlGroupsEnum.Movement]);
+        
+        InSysTools.BindControlGroup(
+            System_InputSystemLocator.InputSystem.Gameplay.AltInteract.bindings.GetEnumerator(),
+            _buttonsSet[ControlGroupsEnum.Alt]);
+        
+        InSysTools.BindControlGroup(
+            System_InputSystemLocator.InputSystem.Gameplay.MainInteract.bindings.GetEnumerator(),
+            _buttonsSet[ControlGroupsEnum.Interact]);
+        
+        InSysTools.BindControlGroup(
+            System_InputSystemLocator.InputSystem.Gameplay.MenuButton.bindings.GetEnumerator(),
+            _buttonsSet[ControlGroupsEnum.Pause]);
     }
 
     private void FillButtonSetDict()
@@ -58,90 +60,51 @@ public class UI_settings : Abstract_UI
         }
     }
 
-    // ♪♪♪ I'm not a big fan of the input system ♪
-    // ♪♪♪ I'm not a big fan of the input system (30 on 30) ♪
-    // ♪♪♪ I'm not a big fan of the input system (30 on 30) ♪
-    // ♪♪♪ I'm not a big fan of the input system (30 30 30 30 30 30) ♪
-    private void DEBUG()
-    {
-        Action<InputControl> act = (x) => Debug.Log($"{x.path} :: {x.path}");
+    // private void BindControlGroup(IEnumerator<InputBinding> enum_i_InputBinding, List<BindingButton> buttonList)
+    // {
+    //     IEnumerator<BindingButton> enum_j_Buttons = buttonList.GetEnumerator();
 
-        //Debug.Log(System_InputSystemLocator.InputSystem.Gameplay.Get());
-        //Debug.Log(System_InputSystemLocator.InputActionAsset.FindBinding());
-        int abc = 0;
-        foreach (InputBinding i in System_InputSystemLocator.InputSystem.bindings)
-        {
-            //Debug.Log(i.id);
-            // foreach(var j in i.bindings)
-            // {
-            //     Debug.Log(j.name);
-            //     Debug.Log(j.path);
-            //     Debug.Log(System_InputSystemLocator.InputSystem.FindBinding(j.name));
-            // }
+    //     while (enum_i_InputBinding.MoveNext() && enum_j_Buttons.MoveNext())
+    //     {
+    //         InputBinding i = enum_i_InputBinding.Current;
+    //         BindingButton j = enum_j_Buttons.Current;
+    //         j.Initialize(i);
+    //     }
+    // }
 
-            if ((i.isPartOfComposite || i.isComposite) && abc++ > 0) // need both checks because it lists composite first then all subbindings of said composite one
-            {
-                Debug.Log($"Composite binidng of {i.GetNameOfComposite()} was detected");
-                continue;
-            }   
+
+
+    // private void DEBUG()
+    // {
+    //     foreach (InputBinding i in System_InputSystemLocator.InputSystem.bindings)
+    //     {
             
-            if (System_InputSystemLocator.InputSystem.FindBinding(i, out InputAction b) != 0) 
-                continue;
+    //         if (System_InputSystemLocator.InputSystem.FindBinding(i, out InputAction b) != 0) 
+    //             continue;
                 
-            Debug.Log("\\/=================\\/");
-            Debug.Log($"InputAction.type : {b.type}");
-            Debug.Log($"InputAction.controls : \\/\\/\\/\\/\\/");
-            Debug.Log("====\\/====");
-            foreach(var j in b.controls)
-            {
-                Debug.Log($"InputControl.name : {j.name}");
+    //         Debug.Log("\\/=================\\/");
+    //         Debug.Log($"InputAction.type : {b.type}");
+    //         Debug.Log($"InputAction.controls : \\/\\/\\/\\/\\/");
+    //         Debug.Log("====\\/====");
+    //         foreach(var j in b.controls)
+    //         {
+    //             Debug.Log($"InputControl.name : {j.name}");
                     
-                Debug.Log($"InputControl.displayName : {j.displayName}");
-                Debug.Log($"InputControl.path : {j.path}");
-            }
-            Debug.Log("===/\\=====");
-            Debug.Log($"InputAction.bindings : \\/\\/\\/\\/\\/");
-            foreach(var j in b.bindings)
-            {
-                Debug.Log($"InputBinding.name : {j.name}");
-                Debug.Log($"InputBinding.id : {j.id}");
-                Debug.Log($"InputBinding.path : {j.path}");
-                Debug.Log($"InputBinding.isPartOfComposite : {j.isPartOfComposite}");
-            }
-            Debug.Log($"InputAction.bindingMask : {b.bindingMask}");
-            Debug.Log($"InputAction.GetBindingDisplayString() : {b.GetBindingDisplayString()}");
-            //Debug.Log(b.GetBindingForControl(System_InputSystemLocator.InputSystem.Gameplay.Movement.controls[0]));
-            Debug.Log("/\\=================/\\");
-        }
-
-        // foreach (InputControl i in System_InputSystemLocator.InputSystem.Gameplay.Movement.controls)//Gameplay.MainInteract.bindings)
-        // {
-        //     // if (i.name.ToLower().Equals("w"))
-        //     // {
-        //     //     InputAction action = System_InputSystemLocator.InputSystem.Gameplay.Movement.actionMap.FindAction(
-        //     //         i.name,
-        //     //         throwIfNotFound : true);
-        //     //     Debug.Log(action is null);
-        //     //     var rebindOperation = action.PerformInteractiveRebinding()
-        //     //         .WithControlsExcluding("Mouse")
-        //     //         .OnMatchWaitForAnother(0.1f)
-        //     //         .Start();
-        //     // }
-
-        //     Debug.Log(i.name);
-        //     // Debug.Log(i.aliases);
-        //     // Debug.Log(i.displayName);
-        //     Debug.Log(i.path);
-        // }
-
-        // foreach (InputBinding i in System_InputSystemLocator.InputSystem.Gameplay.Get())//Gameplay.MainInteract.bindings)
-        //     act(i);
-        // foreach (InputBinding i in System_InputSystemLocator.InputSystem.Gameplay.AltInteract.bindings)
-        //     act(i);
-
-        // foreach (InputBinding i in System_InputSystemLocator.InputSystem.Gameplay.Movement.bindings)
-        //     act(i);
-        // foreach (InputBinding i in System_InputSystemLocator.InputSystem.Gameplay.MenuButton.bindings)
-        //     act(i);
-    }
+    //             Debug.Log($"InputControl.displayName : {j.displayName}");
+    //             Debug.Log($"InputControl.path : {j.path}");
+    //         }
+    //         Debug.Log("===/\\=====");
+    //         Debug.Log($"InputAction.bindings : \\/\\/\\/\\/\\/");
+    //         foreach(var j in b.bindings)
+    //         {
+    //             Debug.Log($"InputBinding.name : {j.name}");
+    //             Debug.Log($"InputBinding.id : {j.id}");
+    //             Debug.Log($"InputBinding.path : {j.path}");
+    //             Debug.Log($"InputBinding.isPartOfComposite : {j.isPartOfComposite}");
+    //         }
+    //         Debug.Log($"InputAction.bindingMask : {b.bindingMask}");
+    //         Debug.Log($"InputAction.GetBindingDisplayString() : {b.GetBindingDisplayString()}");
+    //         Debug.Log("/\\=================/\\");
+    //     }
+    // }
 }
