@@ -62,11 +62,17 @@ public class PlayerController : MonoBehaviour//, InputSystem.IGameplayActions
 
     private void OnMainInteract(InputValue input)
     {
+        if (System_Pauser.PauseActive)
+            return;
+
         cursor.Interact(false);
     }
 
     private void OnAltInteract(InputValue input)
     {
+        if (System_Pauser.PauseActive)
+            return;
+            
         cursor.Interact(alt : true);
     }
 

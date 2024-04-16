@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BindingContainer : MonoBehaviour
 {
-    [SerializeField] private TMP_Text bindingText;
-    [SerializeField] private GameObject buttonPrefab;
+    //[SerializeField] private TMP_Text bindingText;
+    //[SerializeField] private GameObject buttonPrefab;
     [SerializeField] private Transform buttonContainer;
     [SerializeField] private ControlGroupsEnum _controlType;
     [SerializeField] private List<BindingButton> _buttons;

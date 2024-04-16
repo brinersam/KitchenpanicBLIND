@@ -12,7 +12,8 @@ namespace Custom.InputSystemTools
             inputBinding.TryGetAction(out InputAction inputAction);
             inputAction.Disable(); 
             var rebindOperation = inputAction.PerformInteractiveRebinding()
-                        .WithControlsExcluding("Mouse")
+                        .WithControlsExcluding("Mouse/position")
+                        .WithControlsExcluding("Mouse/delta")
                         .WithCancelingThrough("<Keyboard>/escape")
                         .Start()
                         .OnComplete((x) =>

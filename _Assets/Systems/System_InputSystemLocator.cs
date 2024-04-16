@@ -9,7 +9,6 @@ public static class System_InputSystemLocator
     public static InputActionAsset InputActionAsset {get;private set;}
 
     private static SystemsHelper _helper = null;
-    private static int _timeCur;
     public static SystemsHelper Helper 
     {   get => _helper;
         set {Initialze(value);}

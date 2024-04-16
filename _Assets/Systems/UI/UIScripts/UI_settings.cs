@@ -9,6 +9,7 @@ public class UI_settings : Abstract_UI
     [SerializeField] private Button _backButton;
     [SerializeField] private Dictionary<ControlGroupsEnum,List<BindingButton>> _buttonsSet = new();
     [SerializeField] private InputSystem _inputSystem;
+    
 
     private bool _isInitialized = false;
     private Abstract_UI _prevState;
@@ -33,7 +34,7 @@ public class UI_settings : Abstract_UI
         _backButton.onClick.AddListener(OnBackButton);
         FillButtonSetDict();
 
-        // it is possible to automatically generate input settings depending on map/maps which is why this mess is here,
+        // it is possible to automatically generate input ui depending on map/maps which is why this mess is here,
         // for that use same dict thing but for key use typeof InputSystem.GameplayActions.%actionname such as AltInteract%
         // im not motivated enough rn though
 

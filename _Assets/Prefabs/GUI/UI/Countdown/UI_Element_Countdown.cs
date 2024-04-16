@@ -37,7 +37,6 @@ public class UI_Element_Countdown : MonoBehaviour
     }
     private void WhenDone(Action callback)
     {
-        Debug.Log("done");
         callback();
         gameObject.SetActive(false);
     }
