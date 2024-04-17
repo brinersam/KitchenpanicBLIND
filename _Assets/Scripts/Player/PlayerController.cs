@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour//, InputSystem.IGameplayActions
 {
     [SerializeField] private float Ms = 4.5f;
+    [SerializeField] private SoundPlayer sndPlayer;
 
     private PlayerCursor cursor;
     private Animator animator;
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour//, InputSystem.IGameplayActions
 
         if (mvmnt == Vector3.zero) return;
 
+        sndPlayer.Tick();
         MoveInDirection(mvmnt);
     }
 

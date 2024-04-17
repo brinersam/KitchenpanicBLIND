@@ -15,7 +15,15 @@ public class IsDeliveryCounter : MonoBehaviour, IInteractable
         if (topmostItem.Info.Type == ItemType.Container)
         {
             if (System_DishMgr.TryAcceptDish(topmostItem))
+            {
+                System_Audio.Instance.PlaySoundOfType(SoundType.Delivery_Success);
                 playerInv.Item_Lose();
+            }
+            else
+            {
+                System_Audio.Instance.PlaySoundOfType(SoundType.Delivery_Failure);
+            }
+                
         }
     }
 

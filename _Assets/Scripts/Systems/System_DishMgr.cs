@@ -55,7 +55,7 @@ public static class System_DishMgr
             }
         }
 
-        DenyRecipe();
+        //DenyRecipe();
         return false;
     }
 
@@ -83,10 +83,10 @@ public static class System_DishMgr
         OnRecipeRemoved?.Invoke(recipe);
     }
 
-    private static void DenyRecipe()
-    {
-        Debug.Log($"UNACCEPTABLE!!");
-    }
+    // private static void DenyRecipe()
+    // {
+    //     return;
+    // }
 
     private static void Bind()
     {

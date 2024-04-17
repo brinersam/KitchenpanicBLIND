@@ -7,11 +7,14 @@ using System.Linq;
 public class Inventory : MonoBehaviour, IEnumerable<Item>, IEnumerable<ItemInfo>
 {   
     [SerializeField] private int invSlots = 1;
+    [SerializeField] private bool _playsSounds = false;
     [SerializeField] private ItemType[] item_WhiteList; // needs to be generic or bunch of arrays with each having their own type
 
     private LimitedSizeStack<Item> dataStack;
     private ItemDisplayer displayer;
-    readonly HashSet<ItemType> _itemWhiteList;
+    readonly private HashSet<ItemType> _itemWhiteList;
+
+    public bool PlaysSounds => _playsSounds;
     public bool IsFull => dataStack.IsFull;
     public bool IsEmpty => dataStack.IsEmpty;
     public ItemDisplayer Displayer => displayer;
@@ -37,7 +40,6 @@ public class Inventory : MonoBehaviour, IEnumerable<Item>, IEnumerable<ItemInfo>
     {
         TryGetComponent(out ItemDisplayer disp);
         displayer = disp;
-
         dataStack = new(invSlots);
 
         foreach(var i in item_WhiteList)    
@@ -83,6 +85,10 @@ public class Inventory : MonoBehaviour, IEnumerable<Item>, IEnumerable<ItemInfo>
         if (item == null || !PassesWhitelist(item)) return false;
 
         bool success = dataStack.TryPush(item);
+
+        if (success && _playsSounds)
+            System_Audio.Instance.PlaySoundOfType(SoundType.Object_pick);
+
         if (displayer != null) UpdateVisuals();;
         return success;
     }
@@ -90,7 +96,11 @@ public class Inventory : MonoBehaviour, IEnumerable<Item>, IEnumerable<ItemInfo>
     public Item Item_Lose()
     {
         Item temp = dataStack.Pop();
-        if (displayer != null) UpdateVisuals();;
+        if (displayer != null) UpdateVisuals();
+
+        if (temp is null == false && _playsSounds)
+            System_Audio.Instance.PlaySoundOfType(SoundType.Object_drop);
+
         return temp;
     }
     
@@ -103,7 +113,7 @@ public class Inventory : MonoBehaviour, IEnumerable<Item>, IEnumerable<ItemInfo>
     {
         if (!HasWhiteList) return true;
 
-        return _itemWhiteList.Contains(item.Info.Type); // sometimes null item gets thorugh sometimes
+        return _itemWhiteList.Contains(item.Info.Type);
     }
 
     public IEnumerator<Item> GetEnumerator()

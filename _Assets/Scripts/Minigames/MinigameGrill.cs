@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class MinigameWait : MinigameBase // change this to minigame_wait for modularity
+public class MinigameWait : MinigameBase
 {
     [SerializeField] AudioClip activeAmbienceClip;
     [SerializeField] private float secPower = 1;
